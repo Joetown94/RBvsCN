@@ -1,23 +1,13 @@
 #### Libraries Required #### 
 library(tidyverse)
-library(dplyr)
-library(readxl)
-library(reshape2)
 library(ggplot2)
-library(RColorBrewer)
-library(gridExtra)
-library(grid)
 library(lmodel2)
-library(broom)
-library(ggpmisc)
-library(tidyr)
-library(ggpubr)
 library(SimplyAgree)
 library(patchwork)
 
 ############################################################Indonesia Data#######################################
 #### load Reefbudget data
-indo <- read.csv("Indonesia_transect.csv")
+indo <- read.csv("ExtractedData/Indonesia_transect.csv")
 str(indo)
 indo$CN_sumcover = indo$CN_coral_cover + indo$CN_CCA_cover
 indo$RB_sumcover = indo$RB_coral_cover + indo$RB_CCA_cover
@@ -391,6 +381,7 @@ all_data <- list(RB.tidy1,
                  CN.Nobe.tidy)
 all_data2 = all_data %>% reduce(full_join, by='Link')
 
+library(plyr)
 Site.Totalg = ddply(all_data2, .(site.RB), summarise,
                     meanCN_G = mean(TotalgCNNobeV2ncrmpGB),
                     CN.lwr_G = (mean(TotalgCNNobeV2ncrmpGB))-(2*(sd(TotalgCNNobeV2ncrmpGB))),
@@ -526,14 +517,6 @@ SiteTotalg
 CN.allcover.HC = read.csv("ExtractedData/tidy_cn_benthic_cover.csv", header = T)
 CN.allcover.HC$method = "CoralNet"
 
-Site.Cov = ddply(Allcov.split$`Hard Coral`, .(site), summarise,
-                 meanCN = mean(CN_cover),
-                 CN.conf.low = (mean(CN_cover))-(2*sd(CN_cover)),
-                 CN.conf.upr = (mean(CN_cover))+(2*sd(CN_cover)),
-                 meanRB = mean(RB_cover),
-                 RB.conf.low = (mean(RB_cover))-(2*sd(RB_cover)),
-                 RB.conf.upr = (mean(RB_cover))+(2*sd(RB_cover)))
-
 #ReefBudget Cover
 RB.allcover.HC = read.csv("ExtractedData/tidy-rb-allcover_per.csv", header = T)
 RB.allcover.HC$X = NULL
@@ -541,7 +524,7 @@ RB.allcover.HC$method = "ReefBudget"
 names(RB.allcover.HC)[6] = "RB_cover" 
 
 #Other Taxa Cover, combine CCA labels and other CN labels to match RB labels
-library(plyr)
+
 CN.allcover.HC$Group = revalue(CN.allcover.HC$categories, c(
   "Articulated.coralline.algae" = "Secondary Carbonate Producers",
   "Bare.Rock" = "Rock",
@@ -576,11 +559,21 @@ CN.allcover.RB = ddply(CN.allcover.HC, .(Region,Site,Transect,method,Group), sum
                        CN_cover = sum(mean.cover),
                        CN_se = sum(se.cover))
 names(CN.allcover.RB) = c("region","site","transect","method.CN","Group","CN_cover","CN_se")
-detach(package:plyr,unload=TRUE) #detach plyr to prevent issues with Tidyverse
 
 Allcov.merge = merge(CN.allcover.RB, RB.allcover.HC, by = c("site","transect","Group"))
 
 Allcov.split = split(Allcov.merge, Allcov.merge$Group)
+
+Site.Cov = ddply(Allcov.split$`Hard Coral`, .(site), summarise,
+                 meanCN = mean(CN_cover),
+                 CN.conf.low = (mean(CN_cover))-(2*sd(CN_cover)),
+                 CN.conf.upr = (mean(CN_cover))+(2*sd(CN_cover)),
+                 meanRB = mean(RB_cover),
+                 RB.conf.low = (mean(RB_cover))-(2*sd(RB_cover)),
+                 RB.conf.upr = (mean(RB_cover))+(2*sd(RB_cover)))
+
+detach(package:plyr,unload=TRUE) #detach plyr to prevent issues with Tidyverse
+
 
 #Combine CCA cover and Coral cover for total Calcifier Cover
 Allcov.split$`Hard Coral`$SecondaryCN = Allcov.split$`Secondary Carbonate Producers`$CN_cover
@@ -839,7 +832,7 @@ Dif_car.v1v2
 )
 ############################################################Chagos Data#######################################
 #load data 
-data <-  read.csv("tidy_rb_cn_totalcoralg_CI.csv")
+data <-  read.csv("ExtractedData/tidy_rb_cn_totalcoralg_CI.csv")
 
 #create a df for coral carbonate for each method/rates
 carb.method <- data %>% 
@@ -1127,13 +1120,13 @@ Sumcar_cov #1:1 caribbean calcifier cover (Coral + CCA sum)
 car_cov #1:1 caribbean CN vs RB coral cover
 car_cov.CCA #1:1 caribbean CN vs RB CCA cover
 
-Dif_car #Difference plot of CNv2 from RB across Average CN/RB Gross G
-Dif_car.v1v2 #Difference plot of CNv2 from Cnv1 across Average CNv1/CNv2 Gross G
-Dif_indo #Difference plot of CNv2 from RB across Average CN/RB Gross G
-Dif_indo.v1v2 #Difference plot of CNv2 from CNv1 across average CNv1/CNv2 Gross G
+Dif_car #Difference plot of CNv2 from RB across Average CN/RB Gross G for the caribbean
+Dif_car.v1v2 #Difference plot of CNv2 from Cnv1 across Average CNv1/CNv2 Gross G for the caribbean
+Dif_indo #Difference plot of CNv2 from RB across Average CN/RB Gross G for Indonesia
+Dif_indo.v1v2 #Difference plot of CNv2 from CNv1 across average CNv1/CNv2 Gross G for Indonesia
 
 chag_v2 #1:1 chagos CNv2 vs RB Coral G
-Dif_chag #Difference plot of CNv2 from RB across Average CN/RB Coral G
+Dif_chag #Difference plot of CNv2 from RB across Average CN/RB Coral G for Chagos
 chag_CN #1:1 chagos CNv2 vs CNv2 Indo-Indo-Pacific
 
 Slope.lineplot # Model II Major Axis (MA) Slopes of Caribbean (v1,v2,cover), Indonesia(v1,v2,cover)
