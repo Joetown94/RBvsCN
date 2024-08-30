@@ -904,7 +904,7 @@ chag_v2 = ggplot(predict.v2.chag, aes(x = x, y = y)) +
   coord_fixed()+
   coord_cartesian(ylim = c(0,27), xlim = c(0,27))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
-  labs(title = "Coral Carbonate Production", x = bquote("ReefBudget-CCRI (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v2 (kg "~CaCO[3]/m^2/yr~")"))+
+  labs(title = "Coral G", x = bquote("ReefBudget-CCRI (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v2 (kg "~CaCO[3]/m^2/yr~")"))+
   theme(plot.title = element_text(hjust = 0.5))
 
 chag_v2
@@ -978,7 +978,7 @@ Dif_chag = ggplot(chagos.diff) +
   coord_fixed()+
   coord_cartesian(ylim = c(-8,8), xlim = c(0,17))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
-  labs(y= "CoralNet - ReefBudget CCRI", 
+  labs(y= "CoralNet v2 - ReefBudget CCRI", 
        x = "Averaged Coral G",
        title = "Bland-Altman Difference in Coral G")+
   theme(plot.title = element_text(hjust = 0.5))
