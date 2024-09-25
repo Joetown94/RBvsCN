@@ -196,16 +196,13 @@ indo_v1v2
 
 #CNv2 vs ReefBudget
 Dif_indo <- ggplot(indo.diff) + 
-  geom_abline(slope = 0, 
-              intercept= seq(indo.mean.diff$LoA_low, indo.mean.diff$LoA_high, 0.1), 
-              colour = "grey60", alpha = 0.1, linewidth = 1.8)  +
   geom_abline(slope = 0,
               intercept= seq((agree.indo$loa$upper.ci[1]*-1), (agree.indo$loa$lower.ci[1]*-1), 0.1),
-              colour = "grey60", alpha = 0.2, linewidth = 1.8) +
+              colour = "#a50026", alpha = 0.1, linewidth = 1.8) +
   geom_hline(yintercept = 0, lty = 1, linewidth = 1.05)+
   geom_hline(yintercept=indo.mean.diff$mean_diff, colour = '#a50026', linewidth = 1.5) +
-  geom_hline(yintercept=indo.mean.diff$LoA_low, lty = 3, colour = '#a50026') +
-  geom_hline(yintercept=indo.mean.diff$LoA_high, lty = 3, colour = '#a50026') +
+  geom_hline(yintercept=indo.mean.diff$LoA_low, lty = 3, colour = 'black') +
+  geom_hline(yintercept=indo.mean.diff$LoA_high, lty = 3, colour = 'black') +
   geom_hline(yintercept=agree.indo$loa$lower.ci[1]*-1, lty = 2, colour = '#a50026') +
   geom_hline(yintercept=agree.indo$loa$upper.ci[1]*-1, lty = 2, colour = '#a50026') +
   geom_point(aes(mean_g, difference), cex = 2.5, colour = '#a50026', shape = 15) +
@@ -222,16 +219,13 @@ Dif_indo
 
 #CNv1 vs CNv2
 Dif_indo.v1v2 <- ggplot(indo.diff.v1v2) + 
-  geom_abline(slope = 0, 
-              intercept= seq(indo.mean.diff.v1v2$LoA_low, indo.mean.diff.v1v2$LoA_high, 0.1), 
-              colour = "grey60", alpha = 0.1, linewidth = 1.8)  +
   geom_abline(slope = 0,
               intercept= seq((agree.indo.v1v2$loa$upper.ci[1]*-1), (agree.indo.v1v2$loa$lower.ci[1]*-1), 0.1),
-              colour = "grey60", alpha = 0.2, linewidth = 1.8) +
+              colour = "#a50026", alpha = 0.1, linewidth = 1.8) +
   geom_hline(yintercept = 0, lty = 1, linewidth = 1.05)+
   geom_hline(yintercept=indo.mean.diff.v1v2$mean_diff, colour = '#a50026', linewidth = 1.5) +
-  geom_hline(yintercept=indo.mean.diff.v1v2$LoA_low, lty = 3, colour = '#a50026') +
-  geom_hline(yintercept=indo.mean.diff.v1v2$LoA_high, lty = 3, colour = '#a50026') +
+  geom_hline(yintercept=indo.mean.diff.v1v2$LoA_low, lty = 3, colour = 'black') +
+  geom_hline(yintercept=indo.mean.diff.v1v2$LoA_high, lty = 3, colour = 'black') +
   geom_hline(yintercept=agree.indo.v1v2$loa$lower.ci[1]*-1, lty = 2, colour = '#a50026') +
   geom_hline(yintercept=agree.indo.v1v2$loa$upper.ci[1]*-1, lty = 2, colour = '#a50026') +
   geom_point(aes(mean_g, difference), cex = 2.5, colour = '#a50026', shape = 15) +
@@ -747,16 +741,13 @@ prico.mean.diff.v1v2 <- prico.diff.v1v2 %>%
 
 #Plot difference between methods in Bland Altman plot
 Dif_car <- ggplot(prico.diff) + 
-  geom_abline(slope = 0, 
-              intercept= seq(prico.mean.diff$LoA_low, prico.mean.diff$LoA_high, 0.01), 
-              colour = "grey60", alpha = 0.1, linewidth = 1.8)  +
   geom_abline(slope = 0,
               intercept= seq((agree.prico$loa$upper.ci[1]*-1), (agree.prico$loa$lower.ci[1]*-1), 0.01),
-              colour = "grey60", alpha = 0.2, linewidth = 1.8) +
+              colour = "#a50026", alpha = 0.1, linewidth = 1.8) +
   geom_hline(yintercept = 0, lty = 1, linewidth = 1.05)+
   geom_hline(yintercept=prico.mean.diff$mean_diff, colour = '#a50026', linewidth = 1.5) +
-  geom_hline(yintercept=prico.mean.diff$LoA_low, lty = 3, colour = '#a50026') +
-  geom_hline(yintercept=prico.mean.diff$LoA_high, lty = 3, colour = '#a50026') +
+  geom_hline(yintercept=prico.mean.diff$LoA_low, lty = 3, colour = 'black') +
+  geom_hline(yintercept=prico.mean.diff$LoA_high, lty = 3, colour = 'black') +
   geom_hline(yintercept=agree.prico$loa$lower.ci[1]*-1, lty = 2, colour = '#a50026') +
   geom_hline(yintercept=agree.prico$loa$upper.ci[1]*-1, lty = 2, colour = '#a50026') +
   geom_point(aes(mean_g, difference), cex = 2.5, colour = '#a50026', shape = 15) +
@@ -774,16 +765,13 @@ Dif_car
 
 #Plot difference between CoralNet versions in Bland Altman plot
 Dif_car.v1v2 <- ggplot(prico.diff.v1v2) + 
-  geom_abline(slope = 0, 
-              intercept= seq(prico.mean.diff.v1v2$LoA_low, prico.mean.diff.v1v2$LoA_high, 0.01), 
-              colour = "grey60", alpha = 0.1, linewidth = 1.8)  +
   geom_abline(slope = 0,
-              intercept= seq((agree.prico.v1v2$loa$upper.ci[1]*-1), (agree.prico.v1v2$loa$lower.ci[1]*-1), 0.1),
-              colour = "grey60", alpha = 0.2, linewidth = 1.8) +
+              intercept= seq((agree.prico.v1v2$loa$upper.ci[1]*-1), (agree.prico.v1v2$loa$lower.ci[1]*-1), 0.01),
+              colour = "#a50026", alpha = 0.15, linewidth = 1.8) +
   geom_hline(yintercept = 0, lty = 1, linewidth = 1.05)+
   geom_hline(yintercept=prico.mean.diff.v1v2$mean_diff, colour = '#a50026', linewidth = 1.5) +
-  geom_hline(yintercept=prico.mean.diff.v1v2$LoA_low, lty = 3, colour = '#a50026') +
-  geom_hline(yintercept=prico.mean.diff.v1v2$LoA_high, lty = 3, colour = '#a50026') +
+  geom_hline(yintercept=prico.mean.diff.v1v2$LoA_low, lty = 3, colour = 'black') +
+  geom_hline(yintercept=prico.mean.diff.v1v2$LoA_high, lty = 3, colour = 'black') +
   geom_hline(yintercept=agree.prico.v1v2$loa$lower.ci[1]*-1, lty = 2, colour = '#a50026') +
   geom_hline(yintercept=agree.prico.v1v2$loa$upper.ci[1]*-1, lty = 2, colour = '#a50026') +
   geom_point(aes(mean_g, difference), cex = 2.5, colour = '#a50026', shape = 15) +
@@ -930,16 +918,13 @@ chagos.mean.diff <- chagos.diff %>%
 
 #Plot differences between CoralNet v2 (Chagos) and ReefBudget CCRI
 Dif_chag = ggplot(chagos.diff) +
-  geom_abline(slope = 0, 
-              intercept= seq(chagos.mean.diff$LoA_low, chagos.mean.diff$LoA_high, 0.1), 
-              colour = "grey60", alpha = 0.1, linewidth = 1.8) +
   geom_abline(slope = 0,
               intercept= seq((agree.chagos$loa$upper.ci[1]*-1), (agree.chagos$loa$lower.ci[1]*-1), 0.1),
-              colour = "grey60", alpha = 0.2, linewidth = 1.8) +
+              colour = "#e8994d", alpha = 0.15, linewidth = 1.8) +
   geom_hline(yintercept = 0, lty = 1, linewidth = 1.05)+
   geom_hline(yintercept=chagos.mean.diff$mean_diff, colour = '#e8994d', linewidth = 1.5) +
-  geom_hline(yintercept=chagos.mean.diff$LoA_low, lty = 2, colour = '#e8994d') +
-  geom_hline(yintercept=chagos.mean.diff$LoA_high, lty = 2, colour = '#e8994d') +
+  geom_hline(yintercept=chagos.mean.diff$LoA_low, lty = 3, colour = 'black') +
+  geom_hline(yintercept=chagos.mean.diff$LoA_high, lty = 3, colour = 'black') +
   geom_hline(yintercept=agree.chagos$loa$lower.ci[1]*-1, lty = 2, colour = '#e8994d') +
   geom_hline(yintercept=agree.chagos$loa$upper.ci[1]*-1, lty = 2, colour = '#e8994d') +
   geom_point(aes(mean_g, difference), cex = 2.5, colour = '#e8994d', shape = 15) +
