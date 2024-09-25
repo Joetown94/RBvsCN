@@ -78,8 +78,7 @@ indo.data = indo
 indo.diff <- indo.data %>% 
   select(Site, Meter, RB_mean_without_bioerosion, CN_v2_without_bioerosion) %>% 
   group_by(Site, Meter) %>% 
-  mutate(difference = CN_v2_without_bioerosion - RB_mean_without_bioerosion, 
-         percent_diff = ((difference/RB_mean_without_bioerosion)*100),
+  mutate(difference = CN_v2_without_bioerosion - RB_mean_without_bioerosion,
          mean_g = (RB_mean_without_bioerosion + CN_v2_without_bioerosion)/2) %>% 
   ungroup()
 
@@ -88,36 +87,23 @@ indo.diff.v1v2 <- indo.data %>%
   select(Site, Meter, CN_v1_without_bioerosion, CN_v2_without_bioerosion) %>% 
   group_by(Site, Meter) %>% 
   mutate(difference = CN_v2_without_bioerosion - CN_v1_without_bioerosion, 
-         percent_diff = ((difference/CN_v1_without_bioerosion)*100),
          mean_g = (CN_v2_without_bioerosion + CN_v1_without_bioerosion)/2) %>% 
   ungroup()
 
 
 #Mean Difference
 indo.mean.diff <- indo.diff %>% 
-  summarise(mean_percent_difference = mean(percent_diff),
-            se_percent_different = sqrt(var(percent_diff)/length(percent_diff)),
-            mean_diff = mean(difference),
-            se_diff = sqrt(var(difference)/length(difference)))
+  summarise(mean_diff = mean(difference),
+            sd_diff = sd(difference),
+            LoA_low = mean_diff-(1.96*sd_diff),
+            LoA_high = mean_diff+(1.96*sd_diff))
 
 indo.mean.diff.v1v2 <- indo.diff.v1v2 %>% 
-  summarise(mean_percent_difference = mean(percent_diff),
-            se_percent_different = sqrt(var(percent_diff)/length(percent_diff)),
-            mean_diff = mean(difference),
-            se_diff = sqrt(var(difference)/length(difference)))
+  summarise(mean_diff = mean(difference),
+            sd_diff = sd(difference),
+            LoA_low = mean_diff-(1.96*sd_diff),
+            LoA_high = mean_diff+(1.96*sd_diff))
 
-#use t.test to get 95% confidence interval for the mean difference 
-ttest.indo = t.test(indo.diff$CN_v2_without_bioerosion, indo.diff$RB_mean_without_bioerosion, paired = T)
-
-ttest.indo.v1v2 = t.test(indo.diff.v1v2$CN_v2_without_bioerosion, indo.diff.v1v2$CN_v1_without_bioerosion, paired = T)
-
-(lower.ci.indo = ttest.indo$conf.int[1])
-(upper.ci.indo = ttest.indo$conf.int[2])
-(indo.mean.diff =  ttest.indo$estimate)
-
-(lower.ci.indo.v1v2 = ttest.indo.v1v2$conf.int[1])
-(upper.ci.indo.v1v2 = ttest.indo.v1v2$conf.int[2])
-(indo.mean.diff.v1v2 =  ttest.indo.v1v2$estimate)
 
 #### CCC - indo ####
 (agree.indo <- agree_test(x = indo.data$RB_mean_without_bioerosion,
@@ -142,7 +128,6 @@ indo_v1 = ggplot(predict.v1.indo, aes(x = x, y = y)) +
             scale_x_continuous(expand= c(0,0), breaks = seq(0, 30, 5)) +
             scale_y_continuous(expand= c(0,0), breaks = seq(0, 32, 5)) +
             theme_classic() +
-            coord_fixed()+
             coord_cartesian(ylim = c(0,27), xlim = c(0,27))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
             labs(title = "Gross G", x = bquote("ReefBudget (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v1 (kg "~CaCO[3]/m^2/yr~")"))+
@@ -162,7 +147,6 @@ indo_v2 = ggplot(predict.v2.indo, aes(x = x, y = y)) +
             scale_x_continuous(expand= c(0,0), breaks = seq(0, 30, 5)) +
             scale_y_continuous(expand= c(0,0), breaks = seq(0, 32, 5)) +
             theme_classic() +
-            coord_fixed()+
             coord_cartesian(ylim = c(0,27), xlim = c(0,27))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
             labs(title = "Gross G", x = bquote("ReefBudget (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v2 (kg "~CaCO[3]/m^2/yr~")"))+
@@ -182,7 +166,6 @@ indo_RB.regional = ggplot(predict.RB.indo, aes(x = x, y = y)) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 30, 5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 32, 5)) +
   theme_classic() +
-  coord_fixed()+
   coord_cartesian(ylim = c(0,30), xlim = c(0,30.5))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
   labs(title = "ReefBudget (Gross G)", x = bquote("Indo-Pacific ReefBudget"), y = bquote("Indonesia ReefBudget"))+
@@ -202,7 +185,6 @@ indo_v1v2 = ggplot(predict.v1v2.indo, aes(x = x, y = y)) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 30, 5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 32, 5)) +
   theme_classic() +
-  coord_fixed()+
   coord_cartesian(ylim = c(0,27), xlim = c(0,27))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
   labs(title = "Gross G", x = bquote("CoralNet v1 (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v2 (kg "~CaCO[3]/m^2/yr~")"))+
@@ -215,19 +197,17 @@ indo_v1v2
 #CNv2 vs ReefBudget
 Dif_indo <- ggplot(indo.diff) + 
   geom_abline(slope = 0, 
-              intercept= seq(lower.ci.indo, upper.ci.indo, 0.0001), 
-              colour = "grey60", alpha = 0.01, linewidth = 1.8)  +
+              intercept= seq(indo.mean.diff$LoA_low, indo.mean.diff$LoA_high, 0.1), 
+              colour = "grey60", alpha = 0.1, linewidth = 1.8)  +
   geom_hline(yintercept = 0, lty = 1, linewidth = 1.05)+
-  geom_hline(yintercept=indo.mean.diff, colour = '#a50026', linewidth = 1.5) +
-  geom_hline(yintercept=lower.ci.indo, lty = 2, colour = '#a50026') +
-  geom_hline(yintercept=upper.ci.indo, lty = 2, colour = '#a50026') +
+  geom_hline(yintercept=indo.mean.diff$mean_diff, colour = '#a50026', linewidth = 1.5) +
+  geom_hline(yintercept=indo.mean.diff$LoA_low, lty = 2, colour = '#a50026') +
+  geom_hline(yintercept=indo.mean.diff$LoA_high, lty = 2, colour = '#a50026') +
   geom_point(aes(mean_g, difference), cex = 2.5, colour = '#a50026', shape = 15) +
   theme_classic() +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 18, 5)) +
-  scale_y_continuous(expand= c(0,0), breaks = seq(-8, 8, 2)) +
-  theme_classic() +
-  coord_fixed()+
-  coord_cartesian(ylim = c(-8,8), xlim = c(0,18))+
+  scale_y_continuous(expand= c(0,0), breaks = seq(-10, 10, 2)) +
+  coord_cartesian(ylim = c(-10,10), xlim = c(0,18))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
   labs(y= "CoralNet v2 - ReefBudget", 
        x = "Averaged Gross G",
@@ -238,19 +218,17 @@ Dif_indo
 #CNv1 vs CNv2
 Dif_indo.v1v2 <- ggplot(indo.diff.v1v2) + 
   geom_abline(slope = 0, 
-              intercept= seq(lower.ci.indo.v1v2, upper.ci.indo.v1v2, 0.0001), 
-              colour = "grey60", alpha = 0.01, linewidth = 1.8)  +
+              intercept= seq(indo.mean.diff.v1v2$LoA_low, indo.mean.diff.v1v2$LoA_high, 0.1), 
+              colour = "grey60", alpha = 0.1, linewidth = 1.8)  +
   geom_hline(yintercept = 0, lty = 1, linewidth = 1.05)+
-  geom_hline(yintercept=indo.mean.diff.v1v2, colour = '#a50026', linewidth = 1.5) +
-  geom_hline(yintercept=lower.ci.indo.v1v2, lty = 2, colour = '#a50026') +
-  geom_hline(yintercept=upper.ci.indo.v1v2, lty = 2, colour = '#a50026') +
+  geom_hline(yintercept=indo.mean.diff.v1v2$mean_diff, colour = '#a50026', linewidth = 1.5) +
+  geom_hline(yintercept=indo.mean.diff.v1v2$LoA_low, lty = 2, colour = '#a50026') +
+  geom_hline(yintercept=indo.mean.diff.v1v2$LoA_high, lty = 2, colour = '#a50026') +
   geom_point(aes(mean_g, difference), cex = 2.5, colour = '#a50026', shape = 15) +
   theme_classic() +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 18, 5)) +
-  scale_y_continuous(expand= c(0,0), breaks = seq(-8, 8, 2)) +
-  theme_classic() +
-  coord_fixed()+
-  coord_cartesian(ylim = c(-8,8), xlim = c(0,18))+
+  scale_y_continuous(expand= c(0,0), breaks = seq(-10, 10, 2)) +
+  coord_cartesian(ylim = c(-10,10), xlim = c(0,18))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
   labs(y= "CoralNet v2 - CoralNet V1", 
        x = "Averaged Gross G",
@@ -310,7 +288,6 @@ indo_Sumcov =  ggplot(predict.sumcover.indo, aes(x = x, y = y)) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   theme_classic() +
-  coord_fixed()+
   coord_cartesian(ylim = c(0,85), xlim = c(0,85))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
   labs(title = "Total Calcifier Cover", x = "ReefBudget (%)", y = "CoralNet (%)")+
@@ -328,7 +305,6 @@ indo_cov =  ggplot(predict.cover.indo, aes(x = x, y = y)) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   theme_classic() +
-  coord_fixed()+
   coord_cartesian(ylim = c(0,82), xlim = c(0,82))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
   labs(title = "Coral Cover", x = "ReefBudget (%)", y = "CoralNet (%)")+
@@ -346,7 +322,6 @@ indo_cov.CCA =  ggplot(predict.cover.CCA.indo, aes(x = x, y = y)) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 10, 2)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 10, 2)) +
   theme_classic() +
-  coord_fixed()+
   coord_cartesian(ylim = c(-0.05,10), xlim = c(-0.05,10))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
   labs(title = "CCA Cover", x = "ReefBudget (%)", y = "CoralNet (%)")+
@@ -449,7 +424,6 @@ car_v1 = ggplot(predict.v1.car, aes(x = x, y = y)) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 3.0, 0.5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 3.2, 0.5)) +
   theme_classic() +
-  coord_fixed()+
   coord_cartesian(ylim = c(0,2.7), xlim = c(0,2.7))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
   labs(title = "Gross G", x = bquote("ReefBudget (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v1 (kg "~CaCO[3]/m^2/yr~")"))+
@@ -469,7 +443,6 @@ car_v2 = ggplot(predict.v2.car, aes(x = x, y = y)) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 3.0, 0.5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 3.2, 0.5)) +
   theme_classic() +
-  coord_fixed()+
   coord_cartesian(ylim = c(0,2.7), xlim = c(0,2.7))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
   labs(title = "Gross G",x = bquote("ReefBudget (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v2 (kg "~CaCO[3]/m^2/yr~")"))+
@@ -489,7 +462,6 @@ car_v1v2 = ggplot(predict.v1v2.car, aes(x = x, y = y)) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 3.0, 0.5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 3.2, 0.5)) +
   theme_classic() +
-  coord_fixed()+
   coord_cartesian(ylim = c(0,2.7), xlim = c(0,2.7))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
   labs(title = "Gross G",x = bquote("CoralNet v1 (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v2 (kg "~CaCO[3]/m^2/yr~")"))+
@@ -506,7 +478,6 @@ SiteTotalg = ggplot(Site.Totalg, aes(x = meanRB_G, y = meanCN_G))+
   theme_classic() +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 1.7, 0.5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 1.7, 0.5)) +
-  coord_fixed()+
   coord_cartesian(ylim = c(-0.4,1.7), xlim = c(-0.4,1.7))+
   theme(text = element_text(size = 14), plot.title = element_text(size = 14), axis.text = element_text(size = 14), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
   labs(title = "Site-Level Gross G",x = bquote("ReefBudget (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v2 (kg "~CaCO[3]/m^2/yr~")"))+
@@ -626,7 +597,6 @@ Sumcar_cov =  ggplot(predict.Sumcover.car, aes(x = x, y = y)) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   theme_classic() +
-  coord_fixed()+
   coord_cartesian(ylim = c(0,85), xlim = c(0,85))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
   labs(title = "Total Calcifier Cover", x = "ReefBudget (%)", y = "CoralNet (%)")+
@@ -645,7 +615,6 @@ car_cov =  ggplot(predict.cover.car, aes(x = x, y = y)) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 8, 2.5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 8, 2.5)) +
   theme_classic() +
-  coord_fixed()+
   coord_cartesian(ylim = c(0,7.8), xlim = c(0,7.8))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
   labs(title = "Coral Cover", x = "ReefBudget (%)", y = "CoralNet (%)")+
@@ -664,7 +633,6 @@ car_cov.CCA =  ggplot(predict.cover.CCA.car, aes(x = x, y = y)) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   theme_classic() +
-  coord_fixed()+
   coord_cartesian(ylim = c(0,85), xlim = c(0,85))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
   labs(title = "CCA Cover", x = "ReefBudget (%)", y = "CoralNet (%)")+
@@ -681,7 +649,6 @@ SiteCOV = ggplot(Site.Cov, aes(x = meanRB, y = meanCN))+
   geom_point(cex = 4, colour = '#313695', shape = 17)+
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 10, 2.5))+
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 10, 2.5))+
-  coord_fixed()+
   coord_cartesian(ylim = c(-1.5,10.5), xlim = c(-1.5,10.5))+
   theme(text = element_text(size = 14),plot.title = element_text(size = 14),axis.text = element_text(size = 14),axis.text.x = element_text(color="black"),axis.ticks = element_line(color = "black"))+
   labs(title = "Site-Level Coral Cover", x = "ReefBudget (%)", y = "CoralNet (%)")+
@@ -733,13 +700,14 @@ prico.diff <- prico %>%
   pivot_wider(names_from = "rates", values_from = "totalg") %>% 
   group_by(site, transect) %>% 
   mutate(difference = CoralNet - ReefBudget, 
-         percent_diff = ((difference/ReefBudget)*100),
          mean_g = (ReefBudget + CoralNet)/2)  %>% 
   ungroup()
 
 prico.mean.diff <- prico.diff %>% 
   summarise(mean_diff = mean(difference),
-            se_diff = sqrt(var(difference)/length(difference)))
+            sd_diff = sd(difference),
+            LoA_low = mean_diff-(1.96*sd_diff),
+            LoA_high = mean_diff+(1.96*sd_diff))
 
 ## calculate and plot bias between CoralNet versions
 prico.diff.v1v2 <- prico.v1v2 %>% 
@@ -751,40 +719,36 @@ prico.diff.v1v2 <- prico.v1v2 %>%
 
 prico.mean.diff.v1v2 <- prico.diff.v1v2 %>% 
   summarise(mean_diff = mean(difference),
-            se_diff = sqrt(var(difference)/length(difference)))
+            sd_diff = sd(difference),
+            LoA_low = mean_diff-(1.96*sd_diff),
+            LoA_high = mean_diff+(1.96*sd_diff))
 
-#use t.test
-#Between methods
-ttest.car = t.test(prico.diff$CoralNet, prico.diff$ReefBudget, paired = T)
 
-(lower.ci.car = ttest.car$conf.int[1])
-(upper.ci.car = ttest.car$conf.int[2])
-(prico.mean.diff =  ttest.car$estimate)
+#### CCC - puerto rico ####
+#Between Methods
+(agree.prico <- agree_test(x = prico.diff$ReefBudget,
+                           y = prico.diff$CoralNet)
+)
 
 #Between CoralNet versions
-ttest.car.v1v2 = t.test(prico.diff.v1v2$Cari_v1_wo_bio, prico.diff.v1v2$Carib_v2_wo_bio.GBncrmp, paired = T)
-
-(lower.ci.car.v1v2 = ttest.car.v1v2$conf.int[1])
-(upper.ci.car.v1v2 = ttest.car.v1v2$conf.int[2])
-(prico.mean.diff.v1v2 =  ttest.car.v1v2$estimate)
-
+(agree.prico.v1v2 <- agree_test(x = prico.diff.v1v2$Cari_v1_wo_bio,
+                                y = prico.diff.v1v2$Carib_v2_wo_bio.GBncrmp)
+)
 
 #Plot difference between methods in Bland Altman plot
 Dif_car <- ggplot(prico.diff) + 
   geom_abline(slope = 0, 
-              intercept= seq(lower.ci.car, upper.ci.car, 0.0001), 
-              colour = "grey60", alpha = 0.01, linewidth = 1.8)  +
+              intercept= seq(prico.mean.diff$LoA_low, prico.mean.diff$LoA_high, 0.01), 
+              colour = "grey60", alpha = 0.1, linewidth = 1.8)  +
   geom_hline(yintercept = 0, lty = 1, linewidth = 1.05)+
-  geom_hline(yintercept=prico.mean.diff, colour = '#a50026', linewidth = 1.5) +
-  geom_hline(yintercept=lower.ci.car, lty = 2, colour = '#a50026') +
-  geom_hline(yintercept=upper.ci.car, lty = 2, colour = '#a50026') +
+  geom_hline(yintercept=prico.mean.diff$mean_diff, colour = '#a50026', linewidth = 1.5) +
+  geom_hline(yintercept=prico.mean.diff$LoA_low, lty = 2, colour = '#a50026') +
+  geom_hline(yintercept=prico.mean.diff$LoA_high, lty = 2, colour = '#a50026') +
   geom_point(aes(mean_g, difference), cex = 2.5, colour = '#a50026', shape = 15) +
   theme_classic() +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 1.8, .5)) +
-  scale_y_continuous(expand= c(0,0), breaks = seq(-0.8, 0.8, .2)) +
-  theme_classic() +
-  coord_fixed()+
-  coord_cartesian(ylim = c(-0.8,0.8), xlim = c(0,1.7))+
+  scale_y_continuous(expand= c(0,0), breaks = seq(-1.0, 1.0, .2)) +
+  coord_cartesian(ylim = c(-1.0,1.0), xlim = c(0,1.7))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
   labs(y= "CoralNet v2 - ReefBudget", 
        x = "Averaged Gross G",
@@ -796,22 +760,17 @@ Dif_car
 #Plot difference between CoralNet versions in Bland Altman plot
 Dif_car.v1v2 <- ggplot(prico.diff.v1v2) + 
   geom_abline(slope = 0, 
-              intercept= seq(lower.ci.car.v1v2, upper.ci.car.v1v2, 0.0001), 
-              colour = "grey60", alpha = 0.01, linewidth = 1.8)  +
+              intercept= seq(prico.mean.diff.v1v2$LoA_low, prico.mean.diff.v1v2$LoA_high, 0.01), 
+              colour = "grey60", alpha = 0.1, linewidth = 1.8)  +
   geom_hline(yintercept = 0, lty = 1, linewidth = 1.05)+
-  geom_hline(yintercept=prico.mean.diff.v1v2, colour = '#a50026', linewidth = 1.5) +
-  geom_hline(yintercept=lower.ci.car.v1v2, lty = 2, colour = '#a50026') +
-  geom_hline(yintercept=upper.ci.car.v1v2, lty = 2, colour = '#a50026') +
+  geom_hline(yintercept=prico.mean.diff.v1v2$mean_diff, colour = '#a50026', linewidth = 1.5) +
+  geom_hline(yintercept=prico.mean.diff.v1v2$LoA_low, lty = 2, colour = '#a50026') +
+  geom_hline(yintercept=prico.mean.diff.v1v2$LoA_high, lty = 2, colour = '#a50026') +
   geom_point(aes(mean_g, difference), cex = 2.5, colour = '#a50026', shape = 15) +
   theme_classic() +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 1.8, .5)) +
-  scale_y_continuous(expand= c(0,0), breaks = seq(-0.8, 0.8, .2)) +
-  theme_classic() +
-  scale_x_continuous(expand= c(0,0), breaks = seq(0, 1.8, .5)) +
-  scale_y_continuous(expand= c(0,0), breaks = seq(-0.8, 0.8, .2)) +
-  theme_classic() +
-  coord_fixed()+
-  coord_cartesian(ylim = c(-0.8,0.8), xlim = c(0,1.7))+
+  scale_y_continuous(expand= c(0,0), breaks = seq(-1.0, 1.0, .2)) +
+  coord_cartesian(ylim = c(-1.0,1.0), xlim = c(0,1.7))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
   labs(y= "CoralNet v2 - CoralNet v1", 
        x = "Averaged Gross G",
@@ -820,16 +779,7 @@ Dif_car.v1v2 <- ggplot(prico.diff.v1v2) +
 
 Dif_car.v1v2
 
-#### CCC - puerto rico ####
-#Between Methods
-(agree.prico <- agree_test(x = prico.diff$ReefBudget,
-                           y = prico.diff$CoralNet)
-)
 
-#Between CoralNet versions
-(agree.prico.v1v2 <- agree_test(x = prico.diff.v1v2$Cari_v1_wo_bio,
-                           y = prico.diff.v1v2$Carib_v2_wo_bio.GBncrmp)
-)
 ############################################################Chagos Data#######################################
 #load data 
 data <-  read.csv("ExtractedData/tidy_rb_cn_totalcoralg_CI.csv")
@@ -901,7 +851,6 @@ chag_v2 = ggplot(predict.v2.chag, aes(x = x, y = y)) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 30, 5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 32, 5)) +
   theme_classic() +
-  coord_fixed()+
   coord_cartesian(ylim = c(0,27), xlim = c(0,27))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
   labs(title = "Coral G", x = bquote("ReefBudget-CCRI (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v2 (kg "~CaCO[3]/m^2/yr~")"))+
@@ -922,7 +871,6 @@ chag_CN = ggplot(predict.CN.chag, aes(x = x, y = y)) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 30, 5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 32, 5)) +
   theme_classic() +
-  coord_fixed()+
   coord_cartesian(ylim = c(0,30), xlim = c(0,30.5))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
   labs(title = "CoralNet (Coral G)", x = bquote("Indo-Pacific CoralNet"), y = bquote("Chagos CoralNet"))+
@@ -952,31 +900,28 @@ chagos.method <- chagos.data %>%
 #mean bias
 chagos.mean.diff <- chagos.diff %>% 
   summarise(mean_diff = mean(difference),
-            se_diff = sqrt(var(difference)/length(difference)))
+            sd_diff = sd(difference),
+            LoA_low = mean_diff-(1.96*sd_diff),
+            LoA_high = mean_diff+(1.96*sd_diff))
 
-#use t.test 
-ttest.chag = t.test(chagos.diff$coralg_CoralNet, chagos.diff$coralg_ReefBudget, paired = T)
-
-lower.ci.chag = ttest.chag$conf.int[1]
-upper.ci.chag = ttest.chag$conf.int[2]
-chagos.mean.diff <-  ttest.chag$estimate
+(agree.chagos <- agree_test(x = chagos.method$coralg_ReefBudget,
+                            y = chagos.method$coralg_CoralNet)
+)
 
 #Plot differences between CoralNet v2 (Chagos) and ReefBudget CCRI
 Dif_chag = ggplot(chagos.diff) +
   geom_abline(slope = 0, 
-              intercept= seq(lower.ci.chag, upper.ci.chag, 0.001), 
-              colour = "grey60", alpha = 0.01, linewidth = 1.8)  +
+              intercept= seq(chagos.mean.diff$LoA_low, chagos.mean.diff$LoA_high, 0.1), 
+              colour = "grey60", alpha = 0.1, linewidth = 1.8) +
   geom_hline(yintercept = 0, lty = 1, linewidth = 1.05)+
-  geom_hline(yintercept=chagos.mean.diff, colour = '#e8994d', linewidth = 1.5) +
-  geom_hline(yintercept=lower.ci.chag, lty = 2, colour = '#e8994d') +
-  geom_hline(yintercept=upper.ci.chag, lty = 2, colour = '#e8994d') +
+  geom_hline(yintercept=chagos.mean.diff$mean_diff, colour = '#e8994d', linewidth = 1.5) +
+  geom_hline(yintercept=chagos.mean.diff$LoA_low, lty = 2, colour = '#e8994d') +
+  geom_hline(yintercept=chagos.mean.diff$LoA_high, lty = 2, colour = '#e8994d') +
   geom_point(aes(mean_g, difference), cex = 2.5, colour = '#e8994d', shape = 15) +
   theme_classic() +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 18, 5)) +
-  scale_y_continuous(expand= c(0,0), breaks = seq(-8, 8, 2)) +
-  theme_classic() +
-  coord_fixed()+
-  coord_cartesian(ylim = c(-8,8), xlim = c(0,17))+
+  scale_y_continuous(expand= c(0,0), breaks = seq(-10, 10, 2)) +
+  coord_cartesian(ylim = c(-10,10), xlim = c(0,17))+
   theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
   labs(y= "CoralNet v2 - ReefBudget CCRI", 
        x = "Averaged Coral G",
@@ -984,9 +929,6 @@ Dif_chag = ggplot(chagos.diff) +
   theme(plot.title = element_text(hjust = 0.5))
 Dif_chag
 
-(agree.chagos <- agree_test(x = chagos.method$coralg_ReefBudget,
-                            y = chagos.method$coralg_CoralNet)
-)
 
 ############################################################Combined Figures######################################
 
