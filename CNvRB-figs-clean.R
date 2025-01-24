@@ -117,76 +117,76 @@ indo.mean.diff.v1v2 <- indo.diff.v1v2 %>%
 
 # CN v1 vs ReefBudget
 indo_v1 = ggplot(predict.v1.indo, aes(x = x, y = y)) +
-            geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1) +
-            geom_point(cex = 2.5, colour = '#f46d43', shape = 16) +
+            geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1, linewidth = 2) +
+            geom_point(cex = 10, colour = '#f46d43', shape = 16) +
             geom_ribbon(aes(x = x, ymin = lwr, ymax = upr), fill = '#f46d43', alpha = 0.3)+
-            geom_abline(slope = lm2.Nobe.v1.indo$regression.results[2,3], intercept = lm2.Nobe.v1.indo$regression.results[2,2], colour = '#f46d43', linewidth = 1.3)+
-            geom_abline(slope = lm2.Nobe.v1.indo$confidence.intervals[2,4], intercept = lm2.Nobe.v1.indo$confidence.intervals[2,2], colour = '#f46d43', linetype = 3, linewidth = 1.2)+
-            geom_abline(slope = lm2.Nobe.v1.indo$confidence.intervals[2,5], intercept = lm2.Nobe.v1.indo$confidence.intervals[2,3], colour = '#f46d43', linetype = 3, linewidth = 1.2)+
-            geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#f46d43', alpha = 0.6) +
-            geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#f46d43', alpha = 0.6) +
+            geom_abline(slope = lm2.Nobe.v1.indo$regression.results[2,3], intercept = lm2.Nobe.v1.indo$regression.results[2,2], colour = '#f46d43', linewidth = 2)+
+            geom_abline(slope = lm2.Nobe.v1.indo$confidence.intervals[2,4], intercept = lm2.Nobe.v1.indo$confidence.intervals[2,2], colour = '#f46d43', linetype = 5, linewidth = 1.2)+
+            geom_abline(slope = lm2.Nobe.v1.indo$confidence.intervals[2,5], intercept = lm2.Nobe.v1.indo$confidence.intervals[2,3], colour = '#f46d43', linetype = 5, linewidth = 1.2)+
+            geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#f46d43', alpha = 0.75, linewidth = 3) +
+            geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#f46d43', alpha = 0.75, linewidth = 3) +
             scale_x_continuous(expand= c(0,0), breaks = seq(0, 30, 5)) +
             scale_y_continuous(expand= c(0,0), breaks = seq(0, 32, 5)) +
             theme_classic() +
             coord_cartesian(ylim = c(0,27), xlim = c(0,27))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"))+
             labs(title = "Gross G", x = bquote("ReefBudget (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v1 (kg "~CaCO[3]/m^2/yr~")"))+
             theme(plot.title = element_text(hjust = 0.5))
 indo_v1
 
 # CN v2 vs ReefBudget
 indo_v2 = ggplot(predict.v2.indo, aes(x = x, y = y)) +
-            geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1) +
-            geom_point(cex = 2.5, colour = '#a50026', shape = 15) +
+            geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1, linewidth = 2) +
+            geom_point(cex = 10, colour = '#a50026', shape = 15) +
             geom_ribbon(aes(x = x, ymin = lwr, ymax = upr), fill = '#a50026', alpha = 0.3)+
-            geom_abline(slope = lm2.Nobe.v2.indo$regression.results[2,3], intercept = lm2.Nobe.v2.indo$regression.results[2,2], colour = '#a50026', linewidth = 1.3)+
-            geom_abline(slope = lm2.Nobe.v2.indo$confidence.intervals[2,4], intercept = lm2.Nobe.v2.indo$confidence.intervals[2,2], colour = '#a50026', linetype = 3, linewidth = 1.2)+
-            geom_abline(slope = lm2.Nobe.v2.indo$confidence.intervals[2,5], intercept = lm2.Nobe.v2.indo$confidence.intervals[2,3], colour = '#a50026', linetype = 3, linewidth = 1.2)+
-            geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#a50026', alpha = 0.4) +
-            geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#a50026', alpha = 0.4) +
+            geom_abline(slope = lm2.Nobe.v2.indo$regression.results[2,3], intercept = lm2.Nobe.v2.indo$regression.results[2,2], colour = '#a50026', linewidth = 2)+
+            geom_abline(slope = lm2.Nobe.v2.indo$confidence.intervals[2,4], intercept = lm2.Nobe.v2.indo$confidence.intervals[2,2], colour = '#a50026', linetype = 3, linewidth = 5)+
+            geom_abline(slope = lm2.Nobe.v2.indo$confidence.intervals[2,5], intercept = lm2.Nobe.v2.indo$confidence.intervals[2,3], colour = '#a50026', linetype = 3, linewidth = 5)+
+            geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#a50026', alpha = 0.75, linewidth = 3) +
+            geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#a50026', alpha = 0.75, linewidth = 3) +
             scale_x_continuous(expand= c(0,0), breaks = seq(0, 30, 5)) +
             scale_y_continuous(expand= c(0,0), breaks = seq(0, 32, 5)) +
             theme_classic() +
             coord_cartesian(ylim = c(0,27), xlim = c(0,27))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"))+
             labs(title = "Gross G", x = bquote("ReefBudget (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v2 (kg "~CaCO[3]/m^2/yr~")"))+
             theme(plot.title = element_text(hjust = 0.5))
 indo_v2
 
 #ReefBudget Regional Rates vs Local Rates
 indo_RB.regional = ggplot(predict.RB.indo, aes(x = x, y = y)) +
-  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1) +
-  geom_point(cex = 2.5, colour = '#a50026', shape = 18) +
+  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1, linewidth = 2) +
+  geom_point(cex = 10, colour = '#a50026', shape = 18) +
   geom_ribbon(aes(x = x, ymin = lwr, ymax = upr), fill = '#a50026', alpha = 0.3)+
-  geom_abline(slope = lm2.Nobe.RB$regression.results[2,3], intercept = lm2.Nobe.RB$regression.results[2,2], colour = '#a50026', linewidth = 1.3)+
-  geom_abline(slope = lm2.Nobe.RB$confidence.intervals[2,4], intercept = lm2.Nobe.RB$confidence.intervals[2,2], colour = '#a50026', linetype = 3, linewidth = 1.2)+
-  geom_abline(slope = lm2.Nobe.RB$confidence.intervals[2,5], intercept = lm2.Nobe.RB$confidence.intervals[2,3], colour = '#a50026', linetype = 3, linewidth = 1.2)+
-  geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#a50026', alpha = 0.4) +
-  geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#a50026', alpha = 0.4) +
+  geom_abline(slope = lm2.Nobe.RB$regression.results[2,3], intercept = lm2.Nobe.RB$regression.results[2,2], colour = '#a50026', linewidth = 2)+
+  geom_abline(slope = lm2.Nobe.RB$confidence.intervals[2,4], intercept = lm2.Nobe.RB$confidence.intervals[2,2], colour = '#a50026', linetype = 3, linewidth = 5)+
+  geom_abline(slope = lm2.Nobe.RB$confidence.intervals[2,5], intercept = lm2.Nobe.RB$confidence.intervals[2,3], colour = '#a50026', linetype = 3, linewidth = 5)+
+  geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#a50026', alpha = 0.75, linewidth = 3) +
+  geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#a50026', alpha = 0.75, linewidth = 3) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 30, 5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 32, 5)) +
   theme_classic() +
   coord_cartesian(ylim = c(0,30), xlim = c(0,30.5))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"))+
   labs(title = "ReefBudget (Gross G)", x = bquote("Indo-Pacific ReefBudget"), y = bquote("Indonesia ReefBudget"))+
   theme(plot.title = element_text(hjust = 0.5))
 indo_RB.regional
 
 #CoralNet v1 vs v2
 indo_v1v2 = ggplot(predict.v1v2.indo, aes(x = x, y = y)) +
-  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1) +
-  geom_point(cex = 2.5, colour = '#a50026', shape = 15) +
+  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1, linewidth = 2) +
+  geom_point(cex = 10, colour = '#a50026', shape = 15) +
   geom_ribbon(aes(x = x, ymin = lwr, ymax = upr), fill = '#a50026', alpha = 0.3)+
-  geom_abline(slope = lm2.Nobe.v1v2.indo$regression.results[2,3], intercept = lm2.Nobe.v1v2.indo$regression.results[2,2], colour = '#a50026', linewidth = 1.3)+
-  geom_abline(slope = lm2.Nobe.v1v2.indo$confidence.intervals[2,4], intercept = lm2.Nobe.v1v2.indo$confidence.intervals[2,2], colour = '#a50026', linetype = 3, linewidth = 1.2)+
-  geom_abline(slope = lm2.Nobe.v1v2.indo$confidence.intervals[2,5], intercept = lm2.Nobe.v1v2.indo$confidence.intervals[2,3], colour = '#a50026', linetype = 3, linewidth = 1.2)+
-  geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#a50026', alpha = 0.4) +
-  geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#a50026', alpha = 0.4) +
+  geom_abline(slope = lm2.Nobe.v1v2.indo$regression.results[2,3], intercept = lm2.Nobe.v1v2.indo$regression.results[2,2], colour = '#a50026', linewidth = 2)+
+  geom_abline(slope = lm2.Nobe.v1v2.indo$confidence.intervals[2,4], intercept = lm2.Nobe.v1v2.indo$confidence.intervals[2,2], colour = '#a50026', linetype = 3, linewidth = 5)+
+  geom_abline(slope = lm2.Nobe.v1v2.indo$confidence.intervals[2,5], intercept = lm2.Nobe.v1v2.indo$confidence.intervals[2,3], colour = '#a50026', linetype = 3, linewidth = 5)+
+  geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#a50026', alpha = 0.75, linewidth = 3) +
+  geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#a50026', alpha = 0.75, linewidth = 3) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 30, 5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 32, 5)) +
   theme_classic() +
   coord_cartesian(ylim = c(0,27), xlim = c(0,27))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"))+
   labs(title = "Gross G", x = bquote("CoralNet v1 (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v2 (kg "~CaCO[3]/m^2/yr~")"))+
   theme(plot.title = element_text(hjust = 0.5))
 indo_v1v2
@@ -197,20 +197,20 @@ indo_v1v2
 #CNv2 vs ReefBudget
 Dif_indo <- ggplot(indo.diff) + 
   geom_abline(slope = 0,
-              intercept= seq((agree.indo$loa$upper.ci[1]*-1), (agree.indo$loa$lower.ci[1]*-1), 0.1),
-              colour = "#a50026", alpha = 0.1, linewidth = 1.8) +
-  geom_hline(yintercept = 0, lty = 1, linewidth = 1.05)+
-  geom_hline(yintercept=indo.mean.diff$mean_diff, colour = '#a50026', linewidth = 1.5) +
-  geom_hline(yintercept=indo.mean.diff$LoA_low, lty = 3, colour = 'black') +
-  geom_hline(yintercept=indo.mean.diff$LoA_high, lty = 3, colour = 'black') +
-  geom_hline(yintercept=agree.indo$loa$lower.ci[1]*-1, lty = 2, colour = '#a50026') +
-  geom_hline(yintercept=agree.indo$loa$upper.ci[1]*-1, lty = 2, colour = '#a50026') +
-  geom_point(aes(mean_g, difference), cex = 2.5, colour = '#a50026', shape = 15) +
+              intercept= seq((agree.indo$loa$upper.ci[1]*-1), (agree.indo$loa$lower.ci[1]*-1), 0.01),
+              colour = "#a50026", alpha = 0.1, linewidth = 0.8) +
+  geom_hline(yintercept = 0, lty = 1, linewidth = 1.5)+
+  geom_hline(yintercept=indo.mean.diff$mean_diff, colour = '#a50026', linewidth = 3) +
+  geom_hline(yintercept=indo.mean.diff$LoA_low, lty = 3, colour = 'black', linewidth = 3) +
+  geom_hline(yintercept=indo.mean.diff$LoA_high, lty = 3, colour = 'black', linewidth = 3) +
+  geom_hline(yintercept=agree.indo$loa$lower.ci[1]*-1, lty = 2, colour = '#a50026', linewidth = 3) +
+  geom_hline(yintercept=agree.indo$loa$upper.ci[1]*-1, lty = 2, colour = '#a50026', linewidth = 3) +
+  geom_point(aes(mean_g, difference), cex = 10, colour = '#a50026', shape = 15) +
   theme_classic() +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 18, 5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(-10, 10, 2)) +
   coord_cartesian(ylim = c(-10,10), xlim = c(0,18))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(color="black", size = 42), axis.ticks = element_line(color = "black")) +
   labs(y= "CoralNet v2 - ReefBudget", 
        x = "Averaged Gross G",
        title = "Indo-Pacific rates")+
@@ -220,20 +220,20 @@ Dif_indo
 #CNv1 vs CNv2
 Dif_indo.v1v2 <- ggplot(indo.diff.v1v2) + 
   geom_abline(slope = 0,
-              intercept= seq((agree.indo.v1v2$loa$upper.ci[1]*-1), (agree.indo.v1v2$loa$lower.ci[1]*-1), 0.1),
-              colour = "#a50026", alpha = 0.1, linewidth = 1.8) +
-  geom_hline(yintercept = 0, lty = 1, linewidth = 1.05)+
-  geom_hline(yintercept=indo.mean.diff.v1v2$mean_diff, colour = '#a50026', linewidth = 1.5) +
-  geom_hline(yintercept=indo.mean.diff.v1v2$LoA_low, lty = 3, colour = 'black') +
-  geom_hline(yintercept=indo.mean.diff.v1v2$LoA_high, lty = 3, colour = 'black') +
-  geom_hline(yintercept=agree.indo.v1v2$loa$lower.ci[1]*-1, lty = 2, colour = '#a50026') +
-  geom_hline(yintercept=agree.indo.v1v2$loa$upper.ci[1]*-1, lty = 2, colour = '#a50026') +
-  geom_point(aes(mean_g, difference), cex = 2.5, colour = '#a50026', shape = 15) +
+              intercept= seq((agree.indo.v1v2$loa$upper.ci[1]*-1), (agree.indo.v1v2$loa$lower.ci[1]*-1), 0.01),
+              colour = "#a50026", alpha = 0.1, linewidth = 0.8) +
+  geom_hline(yintercept = 0, lty = 1, linewidth = 1.5)+
+  geom_hline(yintercept=indo.mean.diff.v1v2$mean_diff, colour = '#a50026', linewidth = 3) +
+  geom_hline(yintercept=indo.mean.diff.v1v2$LoA_low, lty = 3, colour = 'black', linewidth = 3) +
+  geom_hline(yintercept=indo.mean.diff.v1v2$LoA_high, lty = 3, colour = 'black', linewidth = 3) +
+  geom_hline(yintercept=agree.indo.v1v2$loa$lower.ci[1]*-1, lty = 2, colour = '#a50026', linewidth = 3) +
+  geom_hline(yintercept=agree.indo.v1v2$loa$upper.ci[1]*-1, lty = 2, colour = '#a50026', linewidth = 3) +
+  geom_point(aes(mean_g, difference), cex = 10, colour = '#a50026', shape = 15) +
   theme_classic() +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 18, 5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(-10, 10, 2)) +
   coord_cartesian(ylim = c(-10,10), xlim = c(0,18))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color="black"), axis.ticks = element_line(color = "black"))+
   labs(y= "CoralNet v2 - CoralNet V1", 
        x = "Averaged Gross G",
        title = "Bland-Altman Difference")+
@@ -283,51 +283,51 @@ names(predict.cover.CCA.indo) = c("x","y","fit","lwr","upr")
 
 #Total Calcifier Cover- RB vs CN
 indo_Sumcov =  ggplot(predict.sumcover.indo, aes(x = x, y = y)) +
-  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1) +
-  geom_point(cex = 2.5, colour = '#313695', shape = 17) +
+  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1, linewidth = 2) +
+  geom_point(cex = 10, colour = '#313695', shape = 17) +
   geom_ribbon(aes(x = x, ymin = lwr, ymax = upr), fill = '#313695', alpha = 0.3)+
-  geom_abline(slope = lm2.sumcover.v2.indo$regression.results[2,3], intercept = lm2.sumcover.v2.indo$regression.results[2,2], colour = '#313695', linewidth = 1.3)+
-  geom_abline(slope = lm2.sumcover.v2.indo$confidence.intervals[2,4], intercept = lm2.sumcover.v2.indo$confidence.intervals[2,2], colour = '#313695', linetype = 3, linewidth = 1.2)+
-  geom_abline(slope = lm2.sumcover.v2.indo$confidence.intervals[2,5], intercept = lm2.sumcover.v2.indo$confidence.intervals[2,3], colour = '#313695', linetype = 3, linewidth = 1.2)+
+  geom_abline(slope = lm2.sumcover.v2.indo$regression.results[2,3], intercept = lm2.sumcover.v2.indo$regression.results[2,2], colour = '#313695', linewidth = 2)+
+  geom_abline(slope = lm2.sumcover.v2.indo$confidence.intervals[2,4], intercept = lm2.sumcover.v2.indo$confidence.intervals[2,2], colour = '#313695', linetype = 3, linewidth = 5)+
+  geom_abline(slope = lm2.sumcover.v2.indo$confidence.intervals[2,5], intercept = lm2.sumcover.v2.indo$confidence.intervals[2,3], colour = '#313695', linetype = 3, linewidth = 5)+
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   theme_classic() +
   coord_cartesian(ylim = c(0,85), xlim = c(0,85))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"))+
   labs(title = "Total Calcifier Cover", x = "ReefBudget (%)", y = "CoralNet (%)")+
   theme(plot.title = element_text(hjust = 0.5))
 indo_Sumcov
 
 #Coral Cover- RB vs CN
 indo_cov =  ggplot(predict.cover.indo, aes(x = x, y = y)) +
-  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1) +
-  geom_point(cex = 2.5, colour = '#313695', shape = 17) +
+  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1, linewidth = 2) +
+  geom_point(cex = 10, colour = '#313695', shape = 17) +
   geom_ribbon(aes(x = x, ymin = lwr, ymax = upr), fill = '#313695', alpha = 0.3)+
-  geom_abline(slope = lm2.cover.v2.indo$regression.results[2,3], intercept = lm2.cover.v2.indo$regression.results[2,2], colour = '#313695', linewidth = 1.3)+
-  geom_abline(slope = lm2.cover.v2.indo$confidence.intervals[2,4], intercept = lm2.cover.v2.indo$confidence.intervals[2,2], colour = '#313695', linetype = 3, linewidth = 1.2)+
-  geom_abline(slope = lm2.cover.v2.indo$confidence.intervals[2,5], intercept = lm2.cover.v2.indo$confidence.intervals[2,3], colour = '#313695', linetype = 3, linewidth = 1.2)+
+  geom_abline(slope = lm2.cover.v2.indo$regression.results[2,3], intercept = lm2.cover.v2.indo$regression.results[2,2], colour = '#313695', linewidth = 2)+
+  geom_abline(slope = lm2.cover.v2.indo$confidence.intervals[2,4], intercept = lm2.cover.v2.indo$confidence.intervals[2,2], colour = '#313695', linetype = 3, linewidth = 5)+
+  geom_abline(slope = lm2.cover.v2.indo$confidence.intervals[2,5], intercept = lm2.cover.v2.indo$confidence.intervals[2,3], colour = '#313695', linetype = 3, linewidth = 5)+
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   theme_classic() +
   coord_cartesian(ylim = c(0,82), xlim = c(0,82))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"))+
   labs(title = "Coral Cover", x = "ReefBudget (%)", y = "CoralNet (%)")+
   theme(plot.title = element_text(hjust = 0.5))
 indo_cov
 
 #CCA Cover- RB vs CN
 indo_cov.CCA =  ggplot(predict.cover.CCA.indo, aes(x = x, y = y)) +
-  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1) +
-  geom_point(cex = 2.5, colour = '#313695', shape = 17) +
+  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1, linewidth = 2) +
+  geom_point(cex = 10, colour = '#313695', shape = 17) +
   geom_ribbon(aes(x = x, ymin = lwr, ymax = upr), fill = '#313695', alpha = 0.3)+
-  geom_abline(slope = lm2.cover.CCA.indo$regression.results[2,3], intercept = lm2.cover.CCA.indo$regression.results[2,2], colour = '#313695', linewidth = 1.3)+
-  geom_abline(slope = lm2.cover.CCA.indo$confidence.intervals[2,4], intercept = lm2.cover.CCA.indo$confidence.intervals[2,2], colour = '#313695', linetype = 3, linewidth = 1.2)+
-  geom_abline(slope = lm2.cover.CCA.indo$confidence.intervals[2,5], intercept = lm2.cover.CCA.indo$confidence.intervals[2,3], colour = '#313695', linetype = 3, linewidth = 1.2)+
+  geom_abline(slope = lm2.cover.CCA.indo$regression.results[2,3], intercept = lm2.cover.CCA.indo$regression.results[2,2], colour = '#313695', linewidth = 2)+
+  geom_abline(slope = lm2.cover.CCA.indo$confidence.intervals[2,4], intercept = lm2.cover.CCA.indo$confidence.intervals[2,2], colour = '#313695', linetype = 3, linewidth = 5)+
+  geom_abline(slope = lm2.cover.CCA.indo$confidence.intervals[2,5], intercept = lm2.cover.CCA.indo$confidence.intervals[2,3], colour = '#313695', linetype = 3, linewidth = 5)+
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 10, 2)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 10, 2)) +
   theme_classic() +
-  coord_cartesian(ylim = c(-0.05,10), xlim = c(-0.05,10))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
+  coord_cartesian(ylim = c(-0.05,11.5), xlim = c(-0.05,11.5))+
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"))+
   labs(title = "CCA Cover", x = "ReefBudget (%)", y = "CoralNet (%)")+
   theme(plot.title = element_text(hjust = 0.5))
 indo_cov.CCA
@@ -417,57 +417,57 @@ names(predict.v1v2.car) = c("x","x.lwr","x.upr", "y","y.lwr","y.upr", "fit","lwr
 #####Graph
 #CNv1 vs RB
 car_v1 = ggplot(predict.v1.car, aes(x = x, y = y)) +
-  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1) +
-  geom_point(cex = 2.5, colour = '#f46d43', shape = 16) +
+  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1, linewidth = 2) +
+  geom_point(cex = 10, colour = '#f46d43', shape = 16) +
   geom_ribbon(aes(x = x, ymin = lwr, ymax = upr), fill = '#f46d43', alpha = 0.3)+
-  geom_abline(slope = lm2.Nobe.v1.car$regression.results[2,3], intercept = lm2.Nobe.v1.car$regression.results[2,2], colour = '#f46d43', linewidth = 1.3)+
-  geom_abline(slope = lm2.Nobe.v1.car$confidence.intervals[2,4], intercept = lm2.Nobe.v1.car$confidence.intervals[2,2], colour = '#f46d43', linetype = 3, linewidth = 1.2)+
-  geom_abline(slope = lm2.Nobe.v1.car$confidence.intervals[2,5], intercept = lm2.Nobe.v1.car$confidence.intervals[2,3], colour = '#f46d43', linetype = 3, linewidth = 1.2)+
+  geom_abline(slope = lm2.Nobe.v1.car$regression.results[2,3], intercept = lm2.Nobe.v1.car$regression.results[2,2], colour = '#f46d43', linewidth = 2)+
+  geom_abline(slope = lm2.Nobe.v1.car$confidence.intervals[2,4], intercept = lm2.Nobe.v1.car$confidence.intervals[2,2], colour = '#f46d43', linetype = 3, linewidth = 5)+
+  geom_abline(slope = lm2.Nobe.v1.car$confidence.intervals[2,5], intercept = lm2.Nobe.v1.car$confidence.intervals[2,3], colour = '#f46d43', linetype = 3, linewidth = 5)+
   geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#f46d43', alpha = 0.6) +
   geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#f46d43', alpha = 0.6) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 3.0, 0.5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 3.2, 0.5)) +
   theme_classic() +
   coord_cartesian(ylim = c(0,2.7), xlim = c(0,2.7))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"), axis.text.x = element_text(vjust = -0.01), axis.text.y = element_text(hjust = 1)) +
   labs(title = "Gross G", x = bquote("ReefBudget (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v1 (kg "~CaCO[3]/m^2/yr~")"))+
   theme(plot.title = element_text(hjust = 0.5))
 car_v1
 
 #CNv2 vs RB
 car_v2 = ggplot(predict.v2.car, aes(x = x, y = y)) +
-  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1) +
-  geom_point(cex = 2.5, colour = '#a50026', shape = 15) +
+  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1, linewidth = 2) +
+  geom_point(cex = 10, colour = '#a50026', shape = 15) +
   geom_ribbon(aes(x = x, ymin = lwr, ymax = upr), fill = '#a50026', alpha = 0.3)+
-  geom_abline(slope = lm2.Nobe.v2.car$regression.results[2,3], intercept = lm2.Nobe.v2.car$regression.results[2,2], colour = '#a50026', linewidth = 1.3)+
-  geom_abline(slope = lm2.Nobe.v2.car$confidence.intervals[2,4], intercept = lm2.Nobe.v2.car$confidence.intervals[2,2], colour = '#a50026', linetype = 3, linewidth = 1.2)+
-  geom_abline(slope = lm2.Nobe.v2.car$confidence.intervals[2,5], intercept = lm2.Nobe.v2.car$confidence.intervals[2,3], colour = '#a50026', linetype = 3, linewidth = 1.2)+
-  geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#a50026', alpha = 0.4) +
-  geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#a50026', alpha = 0.4) +
+  geom_abline(slope = lm2.Nobe.v2.car$regression.results[2,3], intercept = lm2.Nobe.v2.car$regression.results[2,2], colour = '#a50026', linewidth = 2)+
+  geom_abline(slope = lm2.Nobe.v2.car$confidence.intervals[2,4], intercept = lm2.Nobe.v2.car$confidence.intervals[2,2], colour = '#a50026', linetype = 3, linewidth = 5)+
+  geom_abline(slope = lm2.Nobe.v2.car$confidence.intervals[2,5], intercept = lm2.Nobe.v2.car$confidence.intervals[2,3], colour = '#a50026', linetype = 3, linewidth = 5)+
+  geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#a50026', alpha = 0.75, linewidth = 3) +
+  geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#a50026', alpha = 0.75, linewidth = 3) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 3.0, 0.5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 3.2, 0.5)) +
   theme_classic() +
   coord_cartesian(ylim = c(0,2.7), xlim = c(0,2.7))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"), axis.text.x = element_text(vjust = -0.01), axis.text.y = element_text(hjust = 1)) +
   labs(title = "Gross G",x = bquote("ReefBudget (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v2 (kg "~CaCO[3]/m^2/yr~")"))+
   theme(plot.title = element_text(hjust = 0.5))
 car_v2
 
 #CNv1 vs CNv2
 car_v1v2 = ggplot(predict.v1v2.car, aes(x = x, y = y)) +
-  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1) +
-  geom_point(cex = 2.5, colour = '#a50026', shape = 15) +
+  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1, linewidth = 2) +
+  geom_point(cex = 10, colour = '#a50026', shape = 15) +
   geom_ribbon(aes(x = x, ymin = lwr, ymax = upr), fill = '#a50026', alpha = 0.3)+
-  geom_abline(slope = lm2.Nobe.v1v2.car$regression.results[2,3], intercept = lm2.Nobe.v1v2.car$regression.results[2,2], colour = '#a50026', linewidth = 1.3)+
-  geom_abline(slope = lm2.Nobe.v1v2.car$confidence.intervals[2,4], intercept = lm2.Nobe.v1v2.car$confidence.intervals[2,2], colour = '#a50026', linetype = 3, linewidth = 1.2)+
-  geom_abline(slope = lm2.Nobe.v1v2.car$confidence.intervals[2,5], intercept = lm2.Nobe.v1v2.car$confidence.intervals[2,3], colour = '#a50026', linetype = 3, linewidth = 1.2)+
-  geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#a50026', alpha = 0.4) +
-  geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#a50026', alpha = 0.4) +
+  geom_abline(slope = lm2.Nobe.v1v2.car$regression.results[2,3], intercept = lm2.Nobe.v1v2.car$regression.results[2,2], colour = '#a50026', linewidth = 2)+
+  geom_abline(slope = lm2.Nobe.v1v2.car$confidence.intervals[2,4], intercept = lm2.Nobe.v1v2.car$confidence.intervals[2,2], colour = '#a50026', linetype = 3, linewidth = 5)+
+  geom_abline(slope = lm2.Nobe.v1v2.car$confidence.intervals[2,5], intercept = lm2.Nobe.v1v2.car$confidence.intervals[2,3], colour = '#a50026', linetype = 3, linewidth = 5)+
+  geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#a50026', alpha = 0.75, linewidth = 3) +
+  geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#a50026', alpha = 0.75, linewidth = 3) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 3.0, 0.5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 3.2, 0.5)) +
   theme_classic() +
   coord_cartesian(ylim = c(0,2.7), xlim = c(0,2.7))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"), axis.text.x = element_text(vjust = -0.01), axis.text.y = element_text(hjust = 1)) +
   labs(title = "Gross G",x = bquote("CoralNet v1 (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v2 (kg "~CaCO[3]/m^2/yr~")"))+
   theme(plot.title = element_text(hjust = 0.5))
 car_v1v2
@@ -476,14 +476,14 @@ car_v1v2
 SiteTotalg = ggplot(Site.Totalg, aes(x = meanRB_G, y = meanCN_G))+
   theme_classic()+
   geom_abline(intercept = 0, slope = 1, colour = 'black')+
-  geom_errorbarh(aes(xmin = RB.lwr_G, xmax = RB.upr_G), height = 0, colour = '#a50026')+
-  geom_errorbar(aes(ymin = CN.lwr_G, ymax = CN.upr_G), width = 0, colour = '#a50026')+
-  geom_point(cex = 4, shape = 15, colour = '#a50026')+
+  geom_errorbarh(aes(xmin = RB.lwr_G, xmax = RB.upr_G), height = 0, colour = '#a50026', linewidth = 3)+
+  geom_errorbar(aes(ymin = CN.lwr_G, ymax = CN.upr_G), width = 0, colour = '#a50026', linewidth = 3)+
+  geom_point(cex = 10, shape = 15, colour = '#a50026')+
   theme_classic() +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 1.7, 0.5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 1.7, 0.5)) +
   coord_cartesian(ylim = c(-0.4,1.7), xlim = c(-0.4,1.7))+
-  theme(text = element_text(size = 14), plot.title = element_text(size = 14), axis.text = element_text(size = 14), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
+  theme(text = element_text(size = 46), plot.title = element_text(size = 46), axis.text = element_text(color="black", size = 46), axis.ticks = element_line(color = "black")) +
   labs(title = "Site-Level Gross G",x = bquote("ReefBudget (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v2 (kg "~CaCO[3]/m^2/yr~")"))+
   theme(plot.title = element_text(hjust = 0.5))
 SiteTotalg
@@ -592,17 +592,17 @@ names(predict.cover.CCA.car) = c("x","y","fit","lwr","upr")
 
 # Plot CN and RB Calcifying cover
 Sumcar_cov =  ggplot(predict.Sumcover.car, aes(x = x, y = y)) +
-  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1) +
-  geom_point(cex = 2.5, colour = '#313695', shape = 17)+
+  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1, linewidth = 2) +
+  geom_point(cex = 10, colour = '#313695', shape = 17)+
   geom_ribbon(aes(x = x, ymin = lwr, ymax = upr), fill = '#313695', alpha = 0.3)+
-  geom_abline(slope = lm2.Sumcover.v2.car$regression.results[2,3], intercept = lm2.Sumcover.v2.car$regression.results[2,2], colour = '#313695', linewidth = 1.3)+
-  geom_abline(slope = lm2.Sumcover.v2.car$confidence.intervals[2,4], intercept = lm2.Sumcover.v2.car$confidence.intervals[2,2], colour = '#313695', linetype = 3, linewidth = 1.2)+
-  geom_abline(slope = lm2.Sumcover.v2.car$confidence.intervals[2,5], intercept = lm2.Sumcover.v2.car$confidence.intervals[2,3], colour = '#313695', linetype = 3, linewidth = 1.2)+
+  geom_abline(slope = lm2.Sumcover.v2.car$regression.results[2,3], intercept = lm2.Sumcover.v2.car$regression.results[2,2], colour = '#313695', linewidth = 2)+
+  geom_abline(slope = lm2.Sumcover.v2.car$confidence.intervals[2,4], intercept = lm2.Sumcover.v2.car$confidence.intervals[2,2], colour = '#313695', linetype = 3, linewidth = 5)+
+  geom_abline(slope = lm2.Sumcover.v2.car$confidence.intervals[2,5], intercept = lm2.Sumcover.v2.car$confidence.intervals[2,3], colour = '#313695', linetype = 3, linewidth = 5)+
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   theme_classic() +
   coord_cartesian(ylim = c(0,85), xlim = c(0,85))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"))+
   labs(title = "Total Calcifier Cover", x = "ReefBudget (%)", y = "CoralNet (%)")+
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -610,17 +610,17 @@ Sumcar_cov
 
 #Plot CN and RB coral cover
 car_cov =  ggplot(predict.cover.car, aes(x = x, y = y)) +
-  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1) +
-  geom_point(cex = 2.5, colour = '#313695', shape = 17) +
+  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1, linewidth = 2) +
+  geom_point(cex = 10, colour = '#313695', shape = 17) +
   geom_ribbon(aes(x = x, ymin = lwr, ymax = upr), fill = '#313695', alpha = 0.3)+
-  geom_abline(slope = lm2.cover.v2.car$regression.results[2,3], intercept = lm2.cover.v2.car$regression.results[2,2], colour = '#313695', linewidth = 1.3)+
-  geom_abline(slope = lm2.cover.v2.car$confidence.intervals[2,4], intercept = lm2.cover.v2.car$confidence.intervals[2,2], colour = '#313695', linetype = 3, linewidth = 1.2)+
-  geom_abline(slope = lm2.cover.v2.car$confidence.intervals[2,5], intercept = lm2.cover.v2.car$confidence.intervals[2,3], colour = '#313695', linetype = 3, linewidth = 1.2)+
+  geom_abline(slope = lm2.cover.v2.car$regression.results[2,3], intercept = lm2.cover.v2.car$regression.results[2,2], colour = '#313695', linewidth = 2)+
+  geom_abline(slope = lm2.cover.v2.car$confidence.intervals[2,4], intercept = lm2.cover.v2.car$confidence.intervals[2,2], colour = '#313695', linetype = 3, linewidth = 5)+
+  geom_abline(slope = lm2.cover.v2.car$confidence.intervals[2,5], intercept = lm2.cover.v2.car$confidence.intervals[2,3], colour = '#313695', linetype = 3, linewidth = 5)+
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 8, 2.5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 8, 2.5)) +
   theme_classic() +
   coord_cartesian(ylim = c(0,7.8), xlim = c(0,7.8))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"),  axis.text.x = element_text(vjust = -0.01), axis.text.y = element_text(hjust = 1))+
   labs(title = "Coral Cover", x = "ReefBudget (%)", y = "CoralNet (%)")+
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -628,17 +628,17 @@ car_cov
 
 #Plot CN and RB CCA Cover
 car_cov.CCA =  ggplot(predict.cover.CCA.car, aes(x = x, y = y)) +
-  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1) +
-  geom_point(cex = 2.5, colour = '#313695', shape = 17)+
+  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1, linewidth = 2) +
+  geom_point(cex = 10, colour = '#313695', shape = 17)+
   geom_ribbon(aes(x = x, ymin = lwr, ymax = upr), fill = '#313695', alpha = 0.3)+
-  geom_abline(slope = lm2.cover.CCA.car$regression.results[2,3], intercept = lm2.cover.CCA.car$regression.results[2,2], colour = '#313695', linewidth = 1.3)+
-  geom_abline(slope = lm2.cover.CCA.car$confidence.intervals[2,4], intercept = lm2.cover.CCA.car$confidence.intervals[2,2], colour = '#313695', linetype = 3, linewidth = 1.2)+
-  geom_abline(slope = lm2.cover.CCA.car$confidence.intervals[2,5], intercept = lm2.cover.CCA.car$confidence.intervals[2,3], colour = '#313695', linetype = 3, linewidth = 1.2)+
+  geom_abline(slope = lm2.cover.CCA.car$regression.results[2,3], intercept = lm2.cover.CCA.car$regression.results[2,2], colour = '#313695', linewidth = 2)+
+  geom_abline(slope = lm2.cover.CCA.car$confidence.intervals[2,4], intercept = lm2.cover.CCA.car$confidence.intervals[2,2], colour = '#313695', linetype = 3, linewidth = 5)+
+  geom_abline(slope = lm2.cover.CCA.car$confidence.intervals[2,5], intercept = lm2.cover.CCA.car$confidence.intervals[2,3], colour = '#313695', linetype = 3, linewidth = 5)+
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 85, 15)) +
   theme_classic() +
   coord_cartesian(ylim = c(0,85), xlim = c(0,85))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"), axis.text.x = element_text(vjust = -0.01), axis.text.y = element_text(hjust = 1))+
   labs(title = "CCA Cover", x = "ReefBudget (%)", y = "CoralNet (%)")+
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -648,13 +648,13 @@ car_cov.CCA
 SiteCOV = ggplot(Site.Cov, aes(x = meanRB, y = meanCN))+
   theme_classic()+
   geom_abline(intercept = 0, slope = 1, colour = 'black')+
-  geom_errorbarh(aes(xmin = RB.conf.low, xmax = RB.conf.upr), height = 0, colour = '#313695')+
-  geom_errorbar(aes(ymin = CN.conf.low, ymax = CN.conf.upr), width = 0, colour = '#313695')+
-  geom_point(cex = 4, colour = '#313695', shape = 17)+
+  geom_errorbarh(aes(xmin = RB.conf.low, xmax = RB.conf.upr), height = 0, colour = '#313695', linewidth = 3)+
+  geom_errorbar(aes(ymin = CN.conf.low, ymax = CN.conf.upr), width = 0, colour = '#313695', linewidth = 3)+
+  geom_point(cex = 10, colour = '#313695', shape = 17)+
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 10, 2.5))+
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 10, 2.5))+
   coord_cartesian(ylim = c(-1.5,10.5), xlim = c(-1.5,10.5))+
-  theme(text = element_text(size = 14),plot.title = element_text(size = 14),axis.text = element_text(size = 14),axis.text.x = element_text(color="black"),axis.ticks = element_line(color = "black"))+
+  theme(text = element_text(size = 46),plot.title = element_text(size = 46),axis.text = element_text(color="black", size =46),axis.ticks = element_line(color = "black"))+
   labs(title = "Site-Level Coral Cover", x = "ReefBudget (%)", y = "CoralNet (%)")+
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -742,20 +742,20 @@ prico.mean.diff.v1v2 <- prico.diff.v1v2 %>%
 #Plot difference between methods in Bland Altman plot
 Dif_car <- ggplot(prico.diff) + 
   geom_abline(slope = 0,
-              intercept= seq((agree.prico$loa$upper.ci[1]*-1), (agree.prico$loa$lower.ci[1]*-1), 0.01),
-              colour = "#a50026", alpha = 0.1, linewidth = 1.8) +
-  geom_hline(yintercept = 0, lty = 1, linewidth = 1.05)+
-  geom_hline(yintercept=prico.mean.diff$mean_diff, colour = '#a50026', linewidth = 1.5) +
-  geom_hline(yintercept=prico.mean.diff$LoA_low, lty = 3, colour = 'black') +
-  geom_hline(yintercept=prico.mean.diff$LoA_high, lty = 3, colour = 'black') +
-  geom_hline(yintercept=agree.prico$loa$lower.ci[1]*-1, lty = 2, colour = '#a50026') +
-  geom_hline(yintercept=agree.prico$loa$upper.ci[1]*-1, lty = 2, colour = '#a50026') +
-  geom_point(aes(mean_g, difference), cex = 2.5, colour = '#a50026', shape = 15) +
+              intercept= seq((agree.prico$loa$upper.ci[1]*-1), (agree.prico$loa$lower.ci[1]*-1), 0.001),
+              colour = "#a50026", alpha = 0.1, linewidth = 0.8) +
+  geom_hline(yintercept = 0, lty = 1, linewidth = 1.5)+
+  geom_hline(yintercept=prico.mean.diff$mean_diff, colour = '#a50026', linewidth = 3) +
+  geom_hline(yintercept=prico.mean.diff$LoA_low, lty = 3, colour = 'black', linewidth = 3) +
+  geom_hline(yintercept=prico.mean.diff$LoA_high, lty = 3, colour = 'black', linewidth = 3) +
+  geom_hline(yintercept=agree.prico$loa$lower.ci[1]*-1, lty = 2, colour = '#a50026', linewidth = 3) +
+  geom_hline(yintercept=agree.prico$loa$upper.ci[1]*-1, lty = 2, colour = '#a50026', linewidth = 3) +
+  geom_point(aes(mean_g, difference), cex = 10, colour = '#a50026', shape = 15) +
   theme_classic() +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 1.8, .5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(-1.0, 1.0, .2)) +
   coord_cartesian(ylim = c(-1.0,1.0), xlim = c(0,1.7))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text.x = element_text(vjust = -0.01), axis.text.y = element_text(hjust = 1), axis.text = element_text(color="black", size = 42), axis.ticks = element_line(color = "black")) +
   labs(y= "CoralNet v2 - ReefBudget", 
        x = "Averaged Gross G",
        title = "Western Atlantic rates")+
@@ -766,20 +766,20 @@ Dif_car
 #Plot difference between CoralNet versions in Bland Altman plot
 Dif_car.v1v2 <- ggplot(prico.diff.v1v2) + 
   geom_abline(slope = 0,
-              intercept= seq((agree.prico.v1v2$loa$upper.ci[1]*-1), (agree.prico.v1v2$loa$lower.ci[1]*-1), 0.01),
-              colour = "#a50026", alpha = 0.15, linewidth = 1.8) +
-  geom_hline(yintercept = 0, lty = 1, linewidth = 1.05)+
-  geom_hline(yintercept=prico.mean.diff.v1v2$mean_diff, colour = '#a50026', linewidth = 1.5) +
-  geom_hline(yintercept=prico.mean.diff.v1v2$LoA_low, lty = 3, colour = 'black') +
-  geom_hline(yintercept=prico.mean.diff.v1v2$LoA_high, lty = 3, colour = 'black') +
-  geom_hline(yintercept=agree.prico.v1v2$loa$lower.ci[1]*-1, lty = 2, colour = '#a50026') +
-  geom_hline(yintercept=agree.prico.v1v2$loa$upper.ci[1]*-1, lty = 2, colour = '#a50026') +
-  geom_point(aes(mean_g, difference), cex = 2.5, colour = '#a50026', shape = 15) +
+              intercept= seq((agree.prico.v1v2$loa$upper.ci[1]*-1), (agree.prico.v1v2$loa$lower.ci[1]*-1), 0.001),
+              colour = "#a50026", alpha = 0.15, linewidth = 0.8) +
+  geom_hline(yintercept = 0, lty = 1, linewidth = 1.5)+
+  geom_hline(yintercept=prico.mean.diff.v1v2$mean_diff, colour = '#a50026', linewidth = 3) +
+  geom_hline(yintercept=prico.mean.diff.v1v2$LoA_low, lty = 3, colour = 'black', linewidth = 3) +
+  geom_hline(yintercept=prico.mean.diff.v1v2$LoA_high, lty = 3, colour = 'black', linewidth = 3) +
+  geom_hline(yintercept=agree.prico.v1v2$loa$lower.ci[1]*-1, lty = 2, colour = '#a50026', linewidth = 3) +
+  geom_hline(yintercept=agree.prico.v1v2$loa$upper.ci[1]*-1, lty = 2, colour = '#a50026', linewidth = 3) +
+  geom_point(aes(mean_g, difference), cex = 10, colour = '#a50026', shape = 15) +
   theme_classic() +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 1.8, .5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(-1.0, 1.0, .2)) +
   coord_cartesian(ylim = c(-1.0,1.0), xlim = c(0,1.7))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"),  axis.text.x = element_text(vjust = -0.01), axis.text.y = element_text(hjust = 1)) +
   labs(y= "CoralNet v2 - CoralNet v1", 
        x = "Averaged Gross G",
        title = "Bland-Altman Difference")+
@@ -848,19 +848,19 @@ names(predict.CN.chag) = c("x","x.lwr","x.upr", "y","y.lwr","y.upr", "fit","lwr"
 #### Plot
 #Plot CNv2 vs RB CCRI Coral G
 chag_v2 = ggplot(predict.v2.chag, aes(x = x, y = y)) +
-  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1) +
-  geom_point(cex = 2.5, colour = '#e8994d', shape = 15) +
+  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1, linewidth = 2) +
+  geom_point(cex = 10, colour = '#e8994d', shape = 15) +
   geom_ribbon(aes(x = x, ymin = lwr, ymax = upr), fill = '#e8994d', alpha = 0.3)+
-  geom_abline(slope = lm2.Nobe.v2.chag$regression.results[2,3], intercept = lm2.Nobe.v2.chag$regression.results[2,2], colour = '#e8994d', linewidth = 1.3)+
-  geom_abline(slope = lm2.Nobe.v2.chag$confidence.intervals[2,4], intercept = lm2.Nobe.v2.chag$confidence.intervals[2,2], colour = '#e8994d', linetype = 3, linewidth = 1.2)+
-  geom_abline(slope = lm2.Nobe.v2.chag$confidence.intervals[2,5], intercept = lm2.Nobe.v2.chag$confidence.intervals[2,3], colour = '#e8994d', linetype = 3, linewidth = 1.2)+
-  geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#e8994d', alpha = 0.4) +
-  geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#e8994d', alpha = 0.4) +
+  geom_abline(slope = lm2.Nobe.v2.chag$regression.results[2,3], intercept = lm2.Nobe.v2.chag$regression.results[2,2], colour = '#e8994d', linewidth = 2)+
+  geom_abline(slope = lm2.Nobe.v2.chag$confidence.intervals[2,4], intercept = lm2.Nobe.v2.chag$confidence.intervals[2,2], colour = '#e8994d', linetype = 3, linewidth = 5)+
+  geom_abline(slope = lm2.Nobe.v2.chag$confidence.intervals[2,5], intercept = lm2.Nobe.v2.chag$confidence.intervals[2,3], colour = '#e8994d', linetype = 3, linewidth = 5)+
+  geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#e8994d', alpha = 0.75, linewidth = 3) +
+  geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#e8994d', alpha = 0.75, linewidth = 3) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 30, 5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 32, 5)) +
   theme_classic() +
   coord_cartesian(ylim = c(0,27), xlim = c(0,27))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"))+
   labs(title = "Coral G", x = bquote("ReefBudget-CCRI (kg "~CaCO[3]/m^2/yr~")"), y = bquote("CoralNet v2 (kg "~CaCO[3]/m^2/yr~")"))+
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -868,19 +868,19 @@ chag_v2
 
 #Plot CNv2 (Chagos) vs CNv2 (Indo-Pacific)
 chag_CN = ggplot(predict.CN.chag, aes(x = x, y = y)) +
-  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1) +
-  geom_point(cex = 2.5, colour = '#e8994d', shape = 15) +
+  geom_abline(intercept = 0, slope = 1, color = "black", linetype = 1, linewidth = 2) +
+  geom_point(cex = 10, colour = '#e8994d', shape = 15) +
   geom_ribbon(aes(x = x, ymin = lwr, ymax = upr), fill = '#e8994d', alpha = 0.3)+
-  geom_abline(slope = lm2.Nobe.CN$regression.results[2,3], intercept = lm2.Nobe.CN$regression.results[2,2], colour = '#e8994d', linewidth = 1.3)+
-  geom_abline(slope = lm2.Nobe.CN$confidence.intervals[2,4], intercept = lm2.Nobe.CN$confidence.intervals[2,2], colour = '#e8994d', linetype = 3, linewidth = 1.2)+
-  geom_abline(slope = lm2.Nobe.CN$confidence.intervals[2,5], intercept = lm2.Nobe.CN$confidence.intervals[2,3], colour = '#e8994d', linetype = 3, linewidth = 1.2)+
-  geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#e8994d', alpha = 0.4) +
-  geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#e8994d', alpha = 0.4) +
+  geom_abline(slope = lm2.Nobe.CN$regression.results[2,3], intercept = lm2.Nobe.CN$regression.results[2,2], colour = '#e8994d', linewidth = 2)+
+  geom_abline(slope = lm2.Nobe.CN$confidence.intervals[2,4], intercept = lm2.Nobe.CN$confidence.intervals[2,2], colour = '#e8994d', linetype = 3, linewidth = 5)+
+  geom_abline(slope = lm2.Nobe.CN$confidence.intervals[2,5], intercept = lm2.Nobe.CN$confidence.intervals[2,3], colour = '#e8994d', linetype = 3, linewidth = 5)+
+  geom_errorbarh(aes(xmin = x.lwr, xmax = x.upr), height = 0,colour = '#e8994d', alpha = 0.75, linewidth = 3) +
+  geom_errorbar(aes(ymin = y.lwr, ymax = y.upr), width = 0,colour = '#e8994d', alpha = 0.75, linewidth = 3) +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 30, 5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(0, 32, 5)) +
   theme_classic() +
   coord_cartesian(ylim = c(0,30), xlim = c(0,30.5))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black"))+
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black"))+
   labs(title = "CoralNet (Coral G)", x = bquote("Indo-Pacific CoralNet"), y = bquote("Chagos CoralNet"))+
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -919,20 +919,20 @@ chagos.mean.diff <- chagos.diff %>%
 #Plot differences between CoralNet v2 (Chagos) and ReefBudget CCRI
 Dif_chag = ggplot(chagos.diff) +
   geom_abline(slope = 0,
-              intercept= seq((agree.chagos$loa$upper.ci[1]*-1), (agree.chagos$loa$lower.ci[1]*-1), 0.1),
-              colour = "#e8994d", alpha = 0.15, linewidth = 1.8) +
-  geom_hline(yintercept = 0, lty = 1, linewidth = 1.05)+
-  geom_hline(yintercept=chagos.mean.diff$mean_diff, colour = '#e8994d', linewidth = 1.5) +
-  geom_hline(yintercept=chagos.mean.diff$LoA_low, lty = 3, colour = 'black') +
-  geom_hline(yintercept=chagos.mean.diff$LoA_high, lty = 3, colour = 'black') +
-  geom_hline(yintercept=agree.chagos$loa$lower.ci[1]*-1, lty = 2, colour = '#e8994d') +
-  geom_hline(yintercept=agree.chagos$loa$upper.ci[1]*-1, lty = 2, colour = '#e8994d') +
-  geom_point(aes(mean_g, difference), cex = 2.5, colour = '#e8994d', shape = 15) +
+              intercept= seq((agree.chagos$loa$upper.ci[1]*-1), (agree.chagos$loa$lower.ci[1]*-1), 0.01),
+              colour = "#e8994d", alpha = 0.15, linewidth = 0.8) +
+  geom_hline(yintercept = 0, lty = 1, linewidth = 1.5)+
+  geom_hline(yintercept=chagos.mean.diff$mean_diff, colour = '#e8994d', linewidth = 3) +
+  geom_hline(yintercept=chagos.mean.diff$LoA_low, lty = 3, colour = 'black', linewidth = 3) +
+  geom_hline(yintercept=chagos.mean.diff$LoA_high, lty = 3, colour = 'black', linewidth = 3) +
+  geom_hline(yintercept=agree.chagos$loa$lower.ci[1]*-1, lty = 2, colour = '#e8994d', linewidth = 3) +
+  geom_hline(yintercept=agree.chagos$loa$upper.ci[1]*-1, lty = 2, colour = '#e8994d', linewidth = 3) +
+  geom_point(aes(mean_g, difference), cex = 10, colour = '#e8994d', shape = 15) +
   theme_classic() +
   scale_x_continuous(expand= c(0,0), breaks = seq(0, 18, 5)) +
   scale_y_continuous(expand= c(0,0), breaks = seq(-10, 10, 2)) +
   coord_cartesian(ylim = c(-10,10), xlim = c(0,17))+
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black")) +
   labs(y= "CoralNet v2 - ReefBudget CCRI", 
        x = "Averaged Coral G",
        title = "Bland-Altman Difference in Coral G")+
@@ -997,14 +997,14 @@ All.reg.region = split(All.reg.conf, All.reg.conf$Region)
 ##slope- all regions
 Slope.lineplot = ggplot(All.reg.conf[All.reg.conf$Region != 'Chagos' & All.reg.conf$Version != 'v1v2',], aes(x = Region, y = Slope, colour = Version))+
   geom_hline(yintercept = 1, colour = 'black', linetype = 2)+
-  geom_linerange(aes(x = Region, ymin = lwr.slope, ymax = upr.slope, colour = Version), linewidth = 3, position = position_dodge(0.5), alpha = 0.6)+
-  geom_point(aes(x = Region, y = Slope, colour = Version, shape = Version), position = position_dodge(0.5), size = 6, fill = "white")+
+  geom_linerange(aes(x = Region, ymin = lwr.slope, ymax = upr.slope, colour = Version), linewidth = 5, position = position_dodge(0.5), alpha = 0.6)+
+  geom_point(aes(x = Region, y = Slope, colour = Version, shape = Version), position = position_dodge(0.5), size = 10, fill = "white")+
   scale_colour_manual(values = c("#f46d43","#a50026","#313695"), labels = c('CoralNet v1','CoralNet v2','Calcifier Cover'))+
   scale_shape_manual(values = c(16,15,17))+
   guides(shape = 'none')+
   theme_classic() +
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
-  theme(legend.position = c(0.3,0.9), legend.title = element_blank(), legend.text = element_text(size = 10))+
+  theme(text = element_text(size =42), plot.title = element_text(size = 42), axis.text = element_text(color="black", size = 42), axis.ticks = element_line(color = "black")) +
+  theme(legend.position = c(0.25,0.92), legend.title = element_blank(), legend.text = element_text(size = 42))+
   labs(title = "Model II Major Axis Slope", x = "Regional Rates", y = "Slope")+
   theme(plot.title = element_text(hjust = 0.5))
 Slope.lineplot
@@ -1012,12 +1012,12 @@ Slope.lineplot
 #Chagos-slope
 Slope.lineplot.chag = ggplot(All.reg.region$Chagos, aes(x = Region, y = Slope))+
   geom_hline(yintercept = 1, colour = 'black', linetype = 2)+
-  geom_linerange(aes(x = Region, ymin = lwr.slope, ymax = upr.slope),colour = '#e8994d', size = 3, position = position_dodge(0.5), alpha = 0.6)+
-  geom_point(aes(x = Region, y = Slope, shape = Version), colour = '#e8994d', position = position_dodge(0.5), size = 6, fill = "white")+
+  geom_linerange(aes(x = Region, ymin = lwr.slope, ymax = upr.slope),colour = '#e8994d', size = 5, position = position_dodge(0.5), alpha = 0.6)+
+  geom_point(aes(x = Region, y = Slope, shape = Version), colour = '#e8994d', position = position_dodge(0.5), size = 10, fill = "white")+
   theme_classic() +
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black")) +
   theme(legend.position = "none", legend.title = element_blank())+
-  theme(axis.text.x=element_blank(),
+  theme(axis.text.x = element_blank(),
         axis.ticks.x=element_blank())+
   ylim(0.50,1.5)+
   labs(title = "Model II Major Axis Slope", x = "Chagos", y = "Slope")+
@@ -1027,10 +1027,10 @@ Slope.lineplot.chag
 #V1v2 Western Atlantic
 Slope.lineplot.car.v1v2 = ggplot(All.reg.region$`Western Atlantic`[All.reg.region$`Western Atlantic`$Version == 'v1v2',], aes(x = Region, y = Slope))+
   geom_hline(yintercept = 1, colour = 'black', linetype = 2)+
-  geom_linerange(aes(x = Region, ymin = lwr.slope, ymax = upr.slope),colour = "#a50026", size = 2, position = position_dodge(0.5), alpha = 0.6)+
-  geom_point(aes(x = Region, y = Slope), colour = "#a50026", shape = 15, position = position_dodge(0.5), size = 3.5, fill = "white")+
+  geom_linerange(aes(x = Region, ymin = lwr.slope, ymax = upr.slope),colour = "#a50026", size = 5, position = position_dodge(0.5), alpha = 0.6)+
+  geom_point(aes(x = Region, y = Slope), colour = "#a50026", shape = 15, position = position_dodge(0.5), size = 10, fill = "white")+
   theme_classic() +
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black")) +
   theme(legend.position = "none", legend.title = element_blank())+
   theme(axis.text.x=element_blank(),
         axis.ticks.x=element_blank())+
@@ -1042,12 +1042,12 @@ Slope.lineplot.car.v1v2
 #V1v2 Indo-Pacific
 Slope.lineplot.indo.v1v2 = ggplot(All.reg.region$`Indo-Pacific`[All.reg.region$`Indo-Pacific`$Version == 'v1v2',], aes(x = Region, y = Slope))+
   geom_hline(yintercept = 1, colour = 'black', linetype = 2)+
-  geom_linerange(aes(x = Region, ymin = lwr.slope, ymax = upr.slope),colour = "#a50026", size = 2, position = position_dodge(0.5), alpha = 0.6)+
-  geom_point(aes(x = Region, y = Slope),colour = "#a50026", shape = 15, position = position_dodge(0.5), size = 3.5, fill = "white")+
+  geom_linerange(aes(x = Region, ymin = lwr.slope, ymax = upr.slope),colour = "#a50026", size = 5, position = position_dodge(0.5), alpha = 0.6)+
+  geom_point(aes(x = Region, y = Slope),colour = "#a50026", shape = 15, position = position_dodge(0.5), size = 10, fill = "white")+
   theme_classic() +
-  theme(text = element_text(size = 11), plot.title = element_text(size = 11), axis.text = element_text(size = 11), axis.text.x = element_text(color="black"), axis.ticks = element_line(color = "black")) +
+  theme(text = element_text(size = 42), plot.title = element_text(size = 42), axis.text = element_text(size = 42, color = "black"), axis.ticks = element_line(color = "black")) +
   theme(legend.position = "none", legend.title = element_blank())+
-  theme(axis.text.x=element_blank(),
+  theme(axis.text=element_blank(),
         axis.ticks.x=element_blank())+
   ylim(0.4,1.6)+
   labs(title = "Major Axis Type II Slope", x = "Indo-Pacific", y = "Slope")+
@@ -1088,42 +1088,42 @@ Slope.lineplot.indo.v1v2 #Model II Major Axis (MA) Slope of Indo-Indo-Pacific (v
 
 #Figure 2
 Fig2.bottom = indo_v1 + indo_v2 + indo_Sumcov + plot_annotation(title = "Indo-Pacific rates",
-                                                             theme = theme(plot.title = element_text(size = 18)), tag_levels = list(c("d","e","f"))) & theme(plot.tag = element_text(size = 18))
+                                                             theme = theme(plot.title = element_text(size = 62)), tag_levels = list(c("d","e","f"))) & theme(plot.tag = element_text(size = 62))
 Fig2.bottom
 Fig2.top = car_v1 + car_v2 + Sumcar_cov + plot_annotation(title = "Western Atlantic rates",
-                                                             theme = theme(plot.title = element_text(size = 18)), tag_levels = list(c("a","b","c"))) & theme(plot.tag = element_text(size = 18))
+                                                             theme = theme(plot.title = element_text(size = 62)), tag_levels = list(c("a","b","c"))) & theme(plot.tag = element_text(size = 62))
 Fig2.top
 #Put them together in another software
 
 #Figure 3
 Slope.lineplot + Dif_car + Dif_indo +
-  plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 18))
+  plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 62))
 
 #Figure 4
 chag_v2 + Slope.lineplot.chag + Dif_chag +
-  plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 18))
+  plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 62))
 
 #Figure 5
 indo_RB.regional + chag_CN +
-  plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 18))
+  plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 62))
 
 #Figure S1
-FigS1.top = car_v1v2 + Slope.lineplot.car.v1v2 +  Dif_car.v1v2 + plot_annotation(title = "Western Atlantic rates", theme = theme(plot.title = element_text(size = 18)), tag_levels = list(c("a","b","c"))) & theme(plot.tag = element_text(size = 18))
+FigS1.top = car_v1v2 + Slope.lineplot.car.v1v2 +  Dif_car.v1v2 + plot_annotation(title = "Western Atlantic rates", theme = theme(plot.title = element_text(size = 62)), tag_levels = list(c("a","b","c"))) & theme(plot.tag = element_text(size = 62))
 FigS1.top
 
-FigS1.bottom = indo_v1v2 + Slope.lineplot.indo.v1v2 + Dif_indo.v1v2 + plot_annotation(title = "Indo-Pacific rates", theme = theme(plot.title = element_text(size = 18)), tag_levels = list(c("d","e","f"))) & theme(plot.tag = element_text(size = 18))
+FigS1.bottom = indo_v1v2 + Slope.lineplot.indo.v1v2 + Dif_indo.v1v2 + plot_annotation(title = "Indo-Pacific rates", theme = theme(plot.title = element_text(size = 62)), tag_levels = list(c("d","e","f"))) & theme(plot.tag = element_text(size = 62))
 FigS1.bottom
 #Put them together in another software
 
 #Figure S2
-FigS2.top = Sumcar_cov + car_cov + car_cov.CCA + plot_annotation(title = "Western Atlantic rates", theme = theme(plot.title = element_text(size = 18)), tag_levels = list(c("a","b","c"))) & theme(plot.tag = element_text(size = 18))
+FigS2.top = Sumcar_cov + car_cov + car_cov.CCA + plot_annotation(title = "Western Atlantic rates", theme = theme(plot.title = element_text(size = 62)), tag_levels = list(c("a","b","c"))) & theme(plot.tag = element_text(size = 62))
 FigS2.top
 
-FigS2.bottom = indo_Sumcov + indo_cov + indo_cov.CCA + plot_annotation(title = "Indo-Pacific rates", theme = theme(plot.title = element_text(size = 18)), tag_levels = list(c("d","e","f"))) & theme(plot.tag = element_text(size = 18))
+FigS2.bottom = indo_Sumcov + indo_cov + indo_cov.CCA + plot_annotation(title = "Indo-Pacific rates", theme = theme(plot.title = element_text(size = 62)), tag_levels = list(c("d","e","f"))) & theme(plot.tag = element_text(size = 62))
 FigS2.bottom
 #Put them together in another software
 
 #Figure S3
 FigS3_site = SiteCOV + SiteTotalg +
-  plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 18))
+  plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 62))
 FigS3_site
